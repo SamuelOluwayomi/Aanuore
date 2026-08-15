@@ -10,12 +10,47 @@ import {
   List,
   X
 } from '@phosphor-icons/react';
+import AnalogClock from './AnalogClock';
 
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="w-full min-h-screen bg-canvas grain-overlay relative overflow-hidden flex flex-col justify-between">
+
+      {/* ── BACKGROUND ARCHITECTURAL CHECKERED GRID (Horizontal & Vertical with Diagonal Hatch Shading) ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-95">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="heroCheckeredGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+              {/* Main 80x80 Grid Borders */}
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(10,10,10,0.16)" strokeWidth="1.2" />
+              
+              {/* Internal 40x40 Subdividers */}
+              <path d="M 40 0 L 40 80 M 0 40 L 80 40" fill="none" stroke="rgba(10,10,10,0.10)" strokeWidth="1" />
+
+              {/* Diagonal Hatch Lines for Checkered Shading in Top-Right 40x40 Quadrant */}
+              <path 
+                d="M 40 8 L 48 0 M 40 16 L 56 0 M 40 24 L 64 0 M 40 32 L 72 0 M 40 40 L 80 0 M 48 40 L 80 8 M 56 40 L 80 16 M 64 40 L 80 24 M 72 40 L 80 32" 
+                stroke="rgba(10,10,10,0.14)" 
+                strokeWidth="1.5" 
+              />
+
+              {/* Diagonal Hatch Lines for Checkered Shading in Bottom-Left 40x40 Quadrant */}
+              <path 
+                d="M 0 48 L 8 40 M 0 56 L 16 40 M 0 64 L 24 40 M 0 72 L 32 40 M 0 80 L 40 40 M 8 80 L 40 48 M 16 80 L 40 56 M 24 80 L 40 64 M 32 80 L 40 72" 
+                stroke="rgba(10,10,10,0.14)" 
+                strokeWidth="1.5" 
+              />
+
+              {/* Intersection Plus Marks */}
+              <path d="M 37 40 L 43 40 M 40 37 L 40 43" stroke="rgba(10,10,10,0.35)" strokeWidth="1.5" />
+              <path d="M 77 80 L 83 80 M 80 77 L 80 83" stroke="rgba(10,10,10,0.35)" strokeWidth="1.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#heroCheckeredGrid)" />
+        </svg>
+      </div>
 
       {/* ── TOP HEADER / NAVBAR (With Sleek Subtle Space from Top) ── */}
       <header className="relative z-30 w-full px-4 sm:px-8 md:px-12 pt-2 sm:pt-2.5 flex items-center justify-between">
@@ -225,32 +260,13 @@ export default function Hero() {
           {/* RIGHT COLUMN: Portrait Card, Rotating Stamp, & Info Card Box */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-5 relative">
 
-            {/* Center-Right: Rotating Circular Badge Stamp & Corner Sparkles */}
+            {/* Center-Right: Real-Time Working Analog Clock & Corner Sparkles */}
             <div className="relative flex items-center justify-between">
+              
+              {/* Real-Time Live Clock */}
+              <AnalogClock compact={true} />
 
-              {/* Rotating circular stamp */}
-              <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center">
-                <svg className="w-full h-full animate-spin-slow" viewBox="0 0 100 100">
-                  <path
-                    id="crypkoCircle"
-                    d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-                    fill="none"
-                  />
-                  <text className="text-[9.5px] font-bold uppercase tracking-widest fill-black font-display-title">
-                    <textPath href="#crypkoCircle">
-                      CREATING • COMMUNICATING • CONNECTING •
-                    </textPath>
-                  </text>
-                </svg>
-
-                {/* Inner Black Badge */}
-                <div className="absolute w-10 h-10 bg-black text-white rounded-full flex flex-col items-center justify-center text-center shadow-md">
-                  <span className="text-[6.5px] font-black uppercase tracking-tighter text-accent-yellow">AANUORE</span>
-                  <span className="text-[6px] font-bold uppercase tracking-widest text-white/80">MEDIA</span>
-                </div>
-              </div>
-
-              {/* Prominent Golden Sparkles Beautifier near Stamp */}
+              {/* Prominent Golden Sparkles Beautifier near Clock */}
               <div className="drop-shadow-md">
                 <img src="/sparkles.svg" alt="" className="w-12 h-12 sm:w-14 sm:h-14" />
               </div>
@@ -289,7 +305,7 @@ export default function Hero() {
                       <span>Creative Direction</span>
                     </div>
                     <span className="text-xs sm:text-sm font-bold tracking-tight text-white drop-shadow-sm">
-                      Aanuoluwapo Ajoke Oreoluwa Koleoso
+                      Aanuoluwapo Ajoke Oreoluwa Koleosho
                     </span>
                   </div>
                 </div>

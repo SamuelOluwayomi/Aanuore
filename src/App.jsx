@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from './components/Hero';
 import AboutSection from './components/AboutSection';
+import WorkSection from './components/WorkSection';
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <main className="w-full">
         <Hero />
         <AboutSection />
+        <WorkSection />
       </main>
 
       {/* Minimal Footer */}
@@ -17,7 +19,7 @@ export default function App() {
             aanuore • Creating. Communicating. Connecting.
           </div>
           <div className="text-xs">
-            Aanuoluwapo Ajoke Oreoluwa Koleoso All Rights Reserved
+            Aanuoluwapo Ajoke Oreoluwa Koleosho
           </div>
         </div>
       </footer>
