@@ -35,7 +35,7 @@ export default function WorkSection() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [lightboxImage, setLightboxImage] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const autoTimerRef = useRef(null);
   const total = allImages.length;
@@ -47,6 +47,28 @@ export default function WorkSection() {
   const handlePrev = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + total) % total);
   }, [total]);
+
+  // Lightbox Navigation
+  const navigateLightbox = useCallback((direction) => {
+    setLightboxIndex((prev) => {
+      if (prev === null) return 0;
+      const next = (prev + direction + total) % total;
+      setCurrentIndex(next);
+      return next;
+    });
+  }, [total]);
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (lightboxIndex === null) return;
+      if (e.key === 'Escape') setLightboxIndex(null);
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex, navigateLightbox]);
 
   // Auto-rotation
   const startAutoPlay = useCallback(() => {
@@ -61,18 +83,18 @@ export default function WorkSection() {
   }, []);
 
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && lightboxIndex === null) {
       startAutoPlay();
     } else {
       stopAutoPlay();
     }
     return () => stopAutoPlay();
-  }, [isPlaying, startAutoPlay, stopAutoPlay]);
+  }, [isPlaying, lightboxIndex, startAutoPlay, stopAutoPlay]);
 
   // Pause on manual interaction, then resume after a beat
   const manualNavigate = (fn) => {
     fn();
-    if (isPlaying) {
+    if (isPlaying && lightboxIndex === null) {
       stopAutoPlay();
       setTimeout(() => startAutoPlay(), AUTO_INTERVAL + 400);
     }
@@ -86,6 +108,16 @@ export default function WorkSection() {
   const handleStageTouchEnd = () => {
     if (stageTouchStartX.current - stageTouchEndX.current > 40) manualNavigate(handleNext);
     if (stageTouchStartX.current - stageTouchEndX.current < -40) manualNavigate(handlePrev);
+  };
+
+  // Touch Swipe for Lightbox
+  const lightboxTouchStartX = useRef(0);
+  const lightboxTouchEndX = useRef(0);
+  const handleLightboxTouchStart = (e) => { lightboxTouchStartX.current = e.targetTouches[0].clientX; };
+  const handleLightboxTouchMove = (e) => { lightboxTouchEndX.current = e.targetTouches[0].clientX; };
+  const handleLightboxTouchEnd = () => {
+    if (lightboxTouchStartX.current - lightboxTouchEndX.current > 40) navigateLightbox(1);
+    if (lightboxTouchStartX.current - lightboxTouchEndX.current < -40) navigateLightbox(-1);
   };
 
   // Keyboard nav
@@ -189,7 +221,13 @@ export default function WorkSection() {
             return (
               <div
                 key={item.id}
-                onClick={() => { if (!isCenter) manualNavigate(() => setCurrentIndex(idx)); }}
+                onClick={() => {
+                  if (isCenter) {
+                    setLightboxIndex(idx);
+                  } else {
+                    manualNavigate(() => setCurrentIndex(idx));
+                  }
+                }}
                 style={{
                   transform: `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotationDeg}deg) scale(${scale})`,
                   zIndex,
@@ -221,11 +259,12 @@ export default function WorkSection() {
                 {/* Expand Button (center only) */}
                 {isCenter && (
                   <button
-                    onClick={(e) => { e.stopPropagation(); setLightboxImage(item); }}
-                    className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/80 hover:bg-accent-yellow hover:text-black text-white flex items-center justify-center transition-colors shadow-md cursor-pointer border border-white/20 z-10"
+                    onClick={(e) => { e.stopPropagation(); setLightboxIndex(idx); }}
+                    className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/80 hover:bg-accent-yellow hover:text-black text-white flex items-center justify-center transition-colors shadow-md cursor-pointer border border-white/20 z-10 active:scale-90"
                     title="View Full Photograph"
+                    aria-label="Expand Photograph"
                   >
-                    <ArrowsOut size={16} weight="bold" />
+                    <ArrowsOut size={18} weight="bold" />
                   </button>
                 )}
 
@@ -261,10 +300,10 @@ export default function WorkSection() {
                 >
                   <div
                     className={`transition-all duration-300 rounded-full ${isActive
-                      ? 'w-6 h-2.5 bg-black'
-                      : isFive
-                        ? 'w-2 h-2 bg-black/40 group-hover:bg-black/70'
-                        : 'w-1.5 h-1.5 bg-black/20 group-hover:bg-black/50'
+                        ? 'w-6 h-2.5 bg-black'
+                        : isFive
+                          ? 'w-2 h-2 bg-black/40 group-hover:bg-black/70'
+                          : 'w-1.5 h-1.5 bg-black/20 group-hover:bg-black/50'
                       }`}
                   />
                 </button>
@@ -285,7 +324,6 @@ export default function WorkSection() {
               >
                 {isPlaying ? <Pause size={16} weight="fill" /> : <Play size={16} weight="fill" />}
               </button>
-
             </div>
 
             {/* Center: Prev / Framed Counter / Next */}
@@ -293,49 +331,50 @@ export default function WorkSection() {
               <button
                 onClick={() => manualNavigate(handlePrev)}
                 aria-label="Previous photograph"
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#ede9df] hover:bg-accent-yellow border-2 border-black flex items-center justify-center shadow-sm active:scale-95 transition-all cursor-pointer"
+                className="w-10 h-10 rounded-full bg-white hover:bg-accent-yellow text-black border-2 border-black flex items-center justify-center transition-all active:scale-90 cursor-pointer shadow-xs"
               >
                 <CaretLeft size={18} weight="bold" />
               </button>
 
-              {/* Framed Index Display */}
-              <div className="flex flex-col items-center min-w-[52px]">
-                <span className="font-mono text-2xl sm:text-3xl font-black text-ink leading-none">
-                  {currentItem.serial}
-                </span>
-                <div className="h-0.5 w-8 bg-black/20 my-0.5 rounded-full" />
-                <span className="font-mono text-[9px] font-bold text-ink-muted tracking-widest uppercase">
-                  OF {total}
-                </span>
+              <div className="px-4 py-2 bg-[#ede9df] rounded-xl border border-black/15 font-mono text-xs font-black text-ink shadow-2xs">
+                {allImages[currentIndex].serial} / {total}
               </div>
 
               <button
                 onClick={() => manualNavigate(handleNext)}
                 aria-label="Next photograph"
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black hover:bg-accent-purple text-white flex items-center justify-center shadow-sm active:scale-95 transition-all cursor-pointer"
+                className="w-10 h-10 rounded-full bg-white hover:bg-accent-yellow text-black border-2 border-black flex items-center justify-center transition-all active:scale-90 cursor-pointer shadow-xs"
               >
                 <CaretRight size={18} weight="bold" />
               </button>
             </div>
 
             {/* Right: Camera icon + rotate timer ring */}
-            <div className="flex items-center gap-3 shrink-0">
-
-              {/* Animated circular timer indicator */}
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                <svg className="absolute inset-0 w-10 h-10 -rotate-90" viewBox="0 0 44 44">
-                  <circle cx="22" cy="22" r={radius} fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="3" />
+            <div className="shrink-0 flex items-center justify-end">
+              <div className="relative w-8 h-8 flex items-center justify-center">
+                <svg className="w-8 h-8 -rotate-90" viewBox="0 0 32 32">
+                  <circle
+                    cx="16"
+                    cy="16"
+                    r={radius}
+                    fill="none"
+                    stroke="#000"
+                    strokeWidth="2"
+                    opacity="0.12"
+                  />
                   {isPlaying && (
                     <circle
-                      cx="22" cy="22" r={radius}
+                      key={currentIndex}
+                      cx="16"
+                      cy="16"
+                      r={radius}
                       fill="none"
                       stroke="#7c3aed"
-                      strokeWidth="3"
+                      strokeWidth="2.5"
                       strokeDasharray={circumference}
-                      strokeDashoffset="0"
                       strokeLinecap="round"
                       style={{
-                        animation: `timerRing ${AUTO_INTERVAL}ms linear infinite`,
+                        animation: `timerRing ${AUTO_INTERVAL}ms linear forwards`,
                       }}
                     />
                   )}
@@ -351,31 +390,94 @@ export default function WorkSection() {
 
       </div>
 
-      {/* ── LIGHTBOX MODAL ── */}
-      {lightboxImage && (
+      {/* ── FULL FEATURED LIGHTBOX MODAL ── */}
+      {lightboxIndex !== null && (
         <div
-          onClick={() => setLightboxImage(null)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
+          onClick={() => setLightboxIndex(null)}
+          onTouchStart={handleLightboxTouchStart}
+          onTouchMove={handleLightboxTouchMove}
+          onTouchEnd={handleLightboxTouchEnd}
+          className="fixed inset-0 z-50 bg-black/92 backdrop-blur-md flex items-center justify-center p-3 sm:p-8 animate-in fade-in duration-200"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl w-full max-h-[90vh] bg-white border-2 border-black rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+            className="relative max-w-4xl w-full max-h-[92vh] bg-white border-2 border-black rounded-3xl overflow-hidden shadow-2xl flex flex-col"
           >
-            <div className="p-4 sm:p-5 border-b-2 border-black flex items-center justify-between bg-canvas">
-              <span className="font-mono text-sm font-black text-ink">PHOTOGRAPH NO. {lightboxImage.serial}</span>
+            {/* Modal Top Bar */}
+            <div className="p-3.5 sm:p-5 border-b-2 border-black flex items-center justify-between bg-canvas">
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs sm:text-sm font-black text-ink">
+                  PHOTOGRAPH NO. {allImages[lightboxIndex].serial}
+                </span>
+                <span className="text-[10px] sm:text-xs font-mono font-bold text-ink-muted bg-white border border-black/15 px-2 py-0.5 rounded-full">
+                  {lightboxIndex + 1} / {total}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                {/* Prev / Next controls in header */}
+                <button
+                  onClick={() => navigateLightbox(-1)}
+                  className="w-8 h-8 rounded-full bg-white hover:bg-accent-yellow text-black border border-black/20 flex items-center justify-center transition-colors cursor-pointer"
+                  title="Previous (Left Arrow)"
+                  aria-label="Previous image"
+                >
+                  <CaretLeft size={16} weight="bold" />
+                </button>
+                <button
+                  onClick={() => navigateLightbox(1)}
+                  className="w-8 h-8 rounded-full bg-white hover:bg-accent-yellow text-black border border-black/20 flex items-center justify-center transition-colors cursor-pointer"
+                  title="Next (Right Arrow)"
+                  aria-label="Next image"
+                >
+                  <CaretRight size={16} weight="bold" />
+                </button>
+                <button
+                  onClick={() => setLightboxIndex(null)}
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black hover:bg-accent-purple text-white flex items-center justify-center transition-colors cursor-pointer ml-1"
+                  title="Close (Esc)"
+                  aria-label="Close modal"
+                >
+                  <X size={18} weight="bold" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Image Body with Large Side Navigation Arrows */}
+            <div className="relative flex-1 overflow-hidden bg-neutral-950 flex items-center justify-center p-2 sm:p-6 min-h-[50vh] max-h-[74vh]">
+              
+              {/* Previous Floating Button */}
               <button
-                onClick={() => setLightboxImage(null)}
-                className="w-9 h-9 rounded-full bg-black hover:bg-accent-purple text-white flex items-center justify-center transition-colors cursor-pointer"
+                onClick={(e) => { e.stopPropagation(); navigateLightbox(-1); }}
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/75 hover:bg-accent-yellow hover:text-black text-white border-2 border-white/20 flex items-center justify-center transition-all shadow-xl z-20 cursor-pointer active:scale-90"
+                aria-label="Previous photograph"
               >
-                <X size={18} weight="bold" />
+                <CaretLeft size={22} weight="bold" />
+              </button>
+
+              {/* Main Image */}
+              <img
+                key={allImages[lightboxIndex].id}
+                src={allImages[lightboxIndex].image}
+                alt={`Full Photograph ${allImages[lightboxIndex].serial}`}
+                className="max-h-[68vh] w-auto max-w-full object-contain rounded-xl shadow-lg select-none animate-in fade-in zoom-in-95 duration-200"
+              />
+
+              {/* Next Floating Button */}
+              <button
+                onClick={(e) => { e.stopPropagation(); navigateLightbox(1); }}
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/75 hover:bg-accent-yellow hover:text-black text-white border-2 border-white/20 flex items-center justify-center transition-all shadow-xl z-20 cursor-pointer active:scale-90"
+                aria-label="Next photograph"
+              >
+                <CaretRight size={22} weight="bold" />
               </button>
             </div>
-            <div className="relative flex-1 overflow-hidden bg-neutral-950 flex items-center justify-center p-2 sm:p-4">
-              <img
-                src={lightboxImage.image}
-                alt={`Full Photograph ${lightboxImage.serial}`}
-                className="max-h-[72vh] w-auto max-w-full object-contain rounded-xl"
-              />
+
+            {/* Modal Footer Bar */}
+            <div className="px-4 py-2.5 bg-canvas border-t-2 border-black flex items-center justify-between text-[11px] font-mono font-bold text-ink-muted">
+              <span className="hidden sm:inline">Use ← / → keys or swipe on mobile</span>
+              <span className="sm:hidden">Swipe left / right to navigate</span>
+              <span className="text-ink font-bold">AANUORE PORTFOLIO</span>
             </div>
           </div>
         </div>
