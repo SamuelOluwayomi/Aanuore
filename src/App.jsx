@@ -38,24 +38,30 @@ export default function App() {
             </span>
           </div>
 
-          {/* Quick Contact Links */}
-          <div className="flex items-center gap-4 text-xs font-bold text-ink flex-wrap justify-center">
+          {/* Quick Contact Action Buttons */}
+          <div className="flex items-center gap-3 text-xs font-bold text-ink flex-wrap justify-center">
             <a 
               href="https://wa.me/2348022218971" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-accent-purple transition-colors"
+              className="flex items-center gap-1.5 hover:text-accent-purple transition-colors bg-white px-3.5 py-1.5 rounded-full border border-black/15 shadow-2xs hover-glow-subtle"
             >
               <WhatsappLogo size={16} weight="fill" className="text-[#25D366]" />
-              <span>08022218971</span>
+              <span>WhatsApp Direct</span>
             </a>
-            <span className="text-black/20">•</span>
             <a 
               href="mailto:anuoluwapokoleosho5@gmail.com" 
-              className="flex items-center gap-1.5 hover:text-accent-purple transition-colors"
+              className="flex items-center gap-1.5 hover:text-accent-purple transition-colors bg-white px-3.5 py-1.5 rounded-full border border-black/15 shadow-2xs hover-glow-subtle"
             >
               <EnvelopeSimple size={16} weight="bold" className="text-accent-purple" />
-              <span>anuoluwapokoleosho5@gmail.com</span>
+              <span>Send An Email</span>
+            </a>
+            <a 
+              href="tel:+2348022218971" 
+              className="flex items-center gap-1.5 hover:text-accent-purple transition-colors bg-white px-3.5 py-1.5 rounded-full border border-black/15 shadow-2xs hover-glow-subtle"
+            >
+              <PhoneCall size={15} weight="bold" className="text-black" />
+              <span>Direct Call</span>
             </a>
           </div>
 
