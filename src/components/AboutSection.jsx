@@ -6,13 +6,6 @@ import {
 } from '@phosphor-icons/react';
 
 export default function AboutSection() {
-  const coreBeliefs = [
-    'A good idea deserves good communication.',
-    'A good brand deserves good storytelling.',
-    'A good property deserves good presentation.',
-    'And every opportunity deserves to be seen.'
-  ];
-
   return (
     <section id="about" className="w-full bg-[#ede9df] border-t-2 border-black/15 relative">
 
@@ -79,7 +72,7 @@ export default function AboutSection() {
               </div>
 
               {/* Photo Card with Dark Bottom Overlay */}
-              <div className="relative aspect-4/5 w-full overflow-hidden rounded-2xl border-2 border-black bg-neutral-200 shadow-md">
+              <div className="relative aspect-4/5 w-full overflow-hidden rounded-2xl border-2 border-black bg-neutral-200 shadow-md hover-glow cursor-pointer">
                 <img
                   src="/about.jpg"
                   alt="Aanuoluwapo Ajoke Oreoluwa Koleosho"
@@ -148,8 +141,8 @@ export default function AboutSection() {
               <img src="/twist.svg" alt="" className="w-8 h-8" />
             </div>
 
-            {/* Tilted Polaroid Art Frame */}
-            <div className="relative w-36 sm:w-52 aspect-square rotate-3 group-hover:rotate-0 transition-transform duration-300">
+            {/* Tilted Polaroid Art Frame with Static Angle & Purple Glow on Hover */}
+            <div className="relative w-44 sm:w-56 aspect-square rotate-3 transition-all duration-300 group-hover:scale-[1.03] group-hover:drop-shadow-[0_12px_30px_rgba(124,58,237,0.35)]">
 
               {/* Car SVG Badge On Top Corner of Polaroid */}
               <div className="absolute -top-3.5 -left-3.5 sm:-top-4 sm:-left-4 z-20 pointer-events-none drop-shadow-md">
@@ -170,10 +163,6 @@ export default function AboutSection() {
                 <img src="/sparkles.svg" alt="" className="w-7 h-7 sm:w-8 sm:h-8" />
               </div>
             </div>
-
-            <span className="mt-3 sm:mt-4 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-ink-muted">
-              On Location &amp; Property Tours
-            </span>
           </div>
 
           {/* Card 3: Content & Digital Media (4 cols) */}
@@ -255,55 +244,25 @@ export default function AboutSection() {
 
         </div>
 
-        {/* ── ROW 3: SPACIOUS LIGHT MANIFESTO BLOCK ── */}
+        {/* ── ROW 3: CLOSING CALL TO ACTION BANNER ── */}
         <div className="p-4 sm:p-10 md:p-14">
-          <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-10 md:p-14 border-2 border-black shadow-lg relative overflow-hidden">
-
-            {/* Top Accent Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 mb-6 sm:mb-8 border-b-2 border-black/10 pb-4 sm:pb-5">
-              <div className="flex items-center gap-2">
-                <Sparkle size={15} weight="fill" className="text-accent-purple" />
-                <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-ink">
-                  WHY AANUORE?
-                </span>
-              </div>
-              <span className="text-xs sm:text-sm text-ink-muted font-medium tracking-wide">
-                Because presentation matters.
-              </span>
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-12 border-2 border-black shadow-lg relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover-glow">
+            <div>
+              <h3 className="font-condensed text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-ink leading-none mb-2">
+                LET US CREATE SOMETHING THAT MATTERS.
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-muted max-w-xl font-medium">
+                Whether you are looking for creative media, property marketing, or strategic brand communication, Aanuore is ready to work with you.
+              </p>
             </div>
 
-            {/* 4 Core Beliefs in 2x2 Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 mb-6 sm:mb-10">
-              {coreBeliefs.map((belief, idx) => (
-                <div key={idx} className="bg-[#faf7f0] border-2 border-black/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 flex items-start gap-3 hover:border-black transition-colors">
-                  <CheckCircle size={18} weight="fill" className="text-accent-purple shrink-0 mt-0.5" />
-                  <span className="text-xs sm:text-base font-semibold text-ink leading-snug">
-                    {belief}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Closing Call to Action Row */}
-            <div className="pt-5 sm:pt-6 border-t-2 border-black/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
-              <div>
-                <h3 className="font-condensed text-2xl sm:text-4xl md:text-5xl uppercase tracking-tight text-ink leading-none mb-1.5 sm:mb-2">
-                  LET US CREATE SOMETHING THAT MATTERS.
-                </h3>
-                <p className="text-xs sm:text-sm text-ink-muted max-w-xl font-medium">
-                  Whether you are looking for creative media, property marketing, or strategic brand communication, Aanuore is ready to work with you.
-                </p>
-              </div>
-
-              <a
-                href="#contact"
-                className="bg-black hover:bg-accent-yellow hover:text-black text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-6 sm:px-8 py-3 sm:py-3.5 rounded-full flex items-center gap-2 shadow-md transition-all duration-200 shrink-0 active:scale-95"
-              >
-                <span>Work With Us</span>
-                <ArrowRight size={15} weight="bold" />
-              </a>
-            </div>
-
+            <a
+              href="#contact"
+              className="bg-black hover:bg-accent-yellow hover:text-black text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-6 sm:px-8 py-3.5 rounded-full flex items-center gap-2 shadow-md transition-all duration-200 shrink-0 active:scale-95 border-2 border-black cursor-pointer"
+            >
+              <span>Work With Us</span>
+              <ArrowRight size={15} weight="bold" />
+            </a>
           </div>
         </div>
 

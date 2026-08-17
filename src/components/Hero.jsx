@@ -70,6 +70,12 @@ export default function Hero() {
         {/* Integrated Black Top Notch */}
         <div className="hidden md:flex items-center gap-8 bg-[#111114] text-white px-9 py-3 rounded-2xl shadow-md border border-black/10">
           <a
+            href="#about"
+            className="text-white/80 hover:text-white text-xs font-semibold uppercase tracking-[0.18em] transition-colors"
+          >
+            About
+          </a>
+          <a
             href="#work"
             className="text-white/80 hover:text-white text-xs font-semibold uppercase tracking-[0.18em] transition-colors"
           >
@@ -82,18 +88,6 @@ export default function Hero() {
             Real Estate
           </a>
           <a
-            href="#about"
-            className="text-white/80 hover:text-white text-xs font-semibold uppercase tracking-[0.18em] transition-colors"
-          >
-            About
-          </a>
-          <a
-            href="#services"
-            className="text-white/80 hover:text-white text-xs font-semibold uppercase tracking-[0.18em] transition-colors"
-          >
-            Services
-          </a>
-          <a
             href="#contact"
             className="text-white/80 hover:text-white text-xs font-semibold uppercase tracking-[0.18em] transition-colors"
           >
@@ -104,7 +98,7 @@ export default function Hero() {
         {/* Right Action Button & Mobile Toggle */}
         <div className="flex items-center gap-2.5">
           <a
-            href="#contact"
+            href="mailto:anuoluwapokoleosho5@gmail.com"
             className="bg-white hover:bg-black hover:text-white text-ink text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full border-2 border-black shadow-sm transition-all duration-200 hidden sm:inline-flex items-center gap-1.5"
           >
             <span>Work With Us</span>
@@ -151,6 +145,14 @@ export default function Hero() {
 
             {/* Menu Links */}
             <a
+              href="#about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 px-3 rounded-xl hover:bg-black hover:text-white transition-all flex items-center justify-between group"
+            >
+              <span>About Aanuore</span>
+              <Globe size={16} weight="bold" className="text-accent-purple group-hover:text-accent-yellow transition-colors" />
+            </a>
+            <a
               href="#work"
               onClick={() => setMobileMenuOpen(false)}
               className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 px-3 rounded-xl hover:bg-black hover:text-white transition-all flex items-center justify-between group"
@@ -167,22 +169,6 @@ export default function Hero() {
               <House size={16} weight="bold" className="text-accent-purple group-hover:text-accent-yellow transition-colors" />
             </a>
             <a
-              href="#about"
-              onClick={() => setMobileMenuOpen(false)}
-              className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 px-3 rounded-xl hover:bg-black hover:text-white transition-all flex items-center justify-between group"
-            >
-              <span>About Aanuore</span>
-              <Globe size={16} weight="bold" className="text-accent-purple group-hover:text-accent-yellow transition-colors" />
-            </a>
-            <a
-              href="#services"
-              onClick={() => setMobileMenuOpen(false)}
-              className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 px-3 rounded-xl hover:bg-black hover:text-white transition-all flex items-center justify-between group"
-            >
-              <span>Services</span>
-              <Sparkle size={16} weight="bold" className="text-accent-purple group-hover:text-accent-yellow transition-colors" />
-            </a>
-            <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
               className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 px-3 rounded-xl hover:bg-black hover:text-white transition-all flex items-center justify-between group"
@@ -193,7 +179,7 @@ export default function Hero() {
 
             {/* Action CTA Button */}
             <a
-              href="#contact"
+              href="mailto:anuoluwapokoleosho5@gmail.com"
               onClick={() => setMobileMenuOpen(false)}
               className="mt-2 w-full py-3 bg-black hover:bg-accent-yellow text-white hover:text-black border-2 border-black font-bold rounded-2xl text-center text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
@@ -241,7 +227,7 @@ export default function Hero() {
 
             {/* Bottom Left Card: hero2.jpg (Landscape Card with House SVG Sticker) */}
             <div className="relative mt-4 sm:mt-8 z-10">
-              <div className="relative border-2 border-black bg-white chamfer-card-tr overflow-hidden shadow-md">
+              <div className="relative border-2 border-black bg-white chamfer-card-tr overflow-hidden shadow-md hover-glow cursor-pointer">
 
                 {/* Photo container */}
                 <div className="relative aspect-16/10 sm:aspect-video max-h-[260px] sm:max-h-[350px] w-full overflow-hidden bg-neutral-100">
@@ -315,7 +301,7 @@ export default function Hero() {
                 <img src="/sparkles.svg" alt="" className="w-8 h-8 sm:w-12 sm:h-12" />
               </div>
 
-              <div className="border-2 border-black bg-white chamfer-card-tl overflow-hidden shadow-md relative flex">
+              <div className="border-2 border-black bg-white chamfer-card-tl overflow-hidden shadow-md relative flex hover-glow cursor-pointer">
 
                 {/* Image Container with Dark Bottom Overlay */}
                 <div className="relative w-full aspect-4/5 sm:aspect-3/4 max-h-[280px] sm:max-h-[350px] overflow-hidden bg-neutral-100">
@@ -353,7 +339,7 @@ export default function Hero() {
             </div>
 
             {/* Bottom Right Info Box */}
-            <div className="bg-white border-2 border-black rounded-2xl p-3.5 sm:p-5 shadow-md relative z-20">
+            <div className="bg-white border-2 border-black rounded-2xl p-3.5 sm:p-5 shadow-md relative z-20 hover-glow cursor-pointer">
 
               {/* Header */}
               <div className="flex items-center justify-between mb-2 border-b border-black/10 pb-1.5">

@@ -27,7 +27,7 @@ export default function AnalogClock({ compact = false }) {
   });
 
   return (
-    <div className="inline-flex items-center gap-2.5 sm:gap-3.5 bg-white/95 border-2 border-black rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 shadow-md select-none group hover:shadow-lg transition-all duration-200">
+    <div className="inline-flex items-center gap-2.5 sm:gap-3.5 bg-white/95 border-2 border-black rounded-2xl sm:rounded-3xl p-2 sm:p-2.5 shadow-md select-none group hover-glow cursor-pointer transition-all duration-300">
       
       {/* ── PRECISION VECTOR SVG CLOCK DIAL ── */}
       <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0">

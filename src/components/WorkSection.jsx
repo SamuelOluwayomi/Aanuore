@@ -197,7 +197,7 @@ export default function WorkSection() {
                   opacity,
                   transition: 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease',
                 }}
-                className={`absolute w-64 sm:w-76 md:w-84 aspect-3/4 rounded-3xl sm:rounded-[36px] border-2 border-black overflow-hidden shadow-xl cursor-pointer group bg-black ${isCenter ? 'shadow-2xl' : 'hover:opacity-90'
+                className={`absolute w-64 sm:w-76 md:w-84 aspect-3/4 rounded-3xl sm:rounded-[36px] border-2 border-black overflow-hidden shadow-xl cursor-pointer group bg-black transition-all duration-300 hover:border-accent-purple hover:shadow-[0_0_30px_rgba(124,58,237,0.4)] ${isCenter ? 'shadow-2xl' : 'hover:opacity-90'
                   }`}
               >
                 <img
@@ -262,10 +262,10 @@ export default function WorkSection() {
                 >
                   <div
                     className={`transition-all duration-300 rounded-full ${isActive
-                        ? 'w-6 h-2.5 bg-black'
-                        : isFive
-                          ? 'w-2 h-2 bg-black/40 group-hover:bg-black/70'
-                          : 'w-1.5 h-1.5 bg-black/20 group-hover:bg-black/50'
+                      ? 'w-6 h-2.5 bg-black'
+                      : isFive
+                        ? 'w-2 h-2 bg-black/40 group-hover:bg-black/70'
+                        : 'w-1.5 h-1.5 bg-black/20 group-hover:bg-black/50'
                       }`}
                   />
                 </button>
@@ -274,7 +274,7 @@ export default function WorkSection() {
           </div>
 
           {/* Main Control Bar */}
-          <div className="bg-white border-2 border-black rounded-2xl px-5 py-4 shadow-md flex items-center justify-between gap-4">
+          <div className="bg-white border-2 border-black rounded-2xl px-5 py-4 shadow-md flex items-center justify-between gap-4 hover-glow-subtle">
 
             {/* Left: Play/Pause + Label */}
             <div className="flex items-center gap-3 shrink-0">
