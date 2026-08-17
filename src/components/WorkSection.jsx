@@ -9,36 +9,26 @@ import {
   Pause
 } from '@phosphor-icons/react';
 
+import { portfolioStore } from '../services/portfolioStore';
+
 const AUTO_INTERVAL = 3500;
 
 export default function WorkSection() {
-  const allImages = [
-    { id: 1, image: '/pictures/IMG-20260814-WA0073.jpg', serial: '01' },
-    { id: 2, image: '/pictures/IMG-20260814-WA0039.jpg', serial: '02' },
-    { id: 3, image: '/pictures/IMG-20260814-WA0090.jpg', serial: '03' },
-    { id: 4, image: '/pictures/IMG-20260814-WA0067.jpg', serial: '04' },
-    { id: 5, image: '/pictures/IMG-20260814-WA0092.jpg', serial: '05' },
-    { id: 6, image: '/pictures/IMG-20260814-WA0066.jpg', serial: '06' },
-    { id: 7, image: '/pictures/IMG-20260814-WA0098.jpg', serial: '07' },
-    { id: 8, image: '/pictures/IMG-20260814-WA0096.jpg', serial: '08' },
-    { id: 9, image: '/pictures/IMG-20260814-WA0075.jpg', serial: '09' },
-    { id: 10, image: '/pictures/IMG-20260814-WA0106.jpg', serial: '10' },
-    { id: 11, image: '/pictures/IMG-20260814-WA0053.jpg', serial: '11' },
-    { id: 12, image: '/pictures/IMG-20260814-WA0071.jpg', serial: '12' },
-    { id: 13, image: '/pictures/IMG-20260814-WA0084.jpg', serial: '13' },
-    { id: 14, image: '/pictures/IMG-20260814-WA0091.jpg', serial: '14' },
-    { id: 15, image: '/pictures/IMG-20260814-WA0099.jpg', serial: '15' },
-    { id: 16, image: '/pictures/IMG-20260814-WA0100.jpg', serial: '16' },
-    { id: 17, image: '/pictures/IMG-20260814-WA0103.jpg', serial: '17' },
-    { id: 18, image: '/pictures/IMG-20260814-WA0105.jpg', serial: '18' },
-    { id: 19, image: '/pictures/IMG-20260814-WA0107.jpg', serial: '19' }
-  ];
-
+  const [allImages, setAllImages] = useState(() => portfolioStore.getImages());
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const autoTimerRef = useRef(null);
   const total = allImages.length;
+
+  // Sync with portfolio store updates (live admin additions/deletions)
+  useEffect(() => {
+    const unsubscribe = portfolioStore.subscribe((newImages) => {
+      setAllImages(newImages);
+      setCurrentIndex((prev) => (prev >= newImages.length ? 0 : prev));
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % total);
@@ -151,13 +141,13 @@ export default function WorkSection() {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowRight') manualNavigate(handleNext);
       if (e.key === 'ArrowLeft') manualNavigate(handlePrev);
-      if (e.key === 'Escape') setLightboxImage(null);
+      if (e.key === 'Escape') setLightboxIndex(null);
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [total, isPlaying]);
+  }, [total, isPlaying, handleNext, handlePrev]);
 
-  const currentItem = allImages[currentIndex];
+  const currentItem = allImages[currentIndex] || allImages[0] || { serial: '01', title: 'Work', image: '' };
   // Progress arc for the circular timer
   const radius = 18;
   const circumference = 2 * Math.PI * radius;

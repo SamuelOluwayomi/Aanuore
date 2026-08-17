@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Hero from './components/Hero';
 import AboutSection from './components/AboutSection';
 import WorkSection from './components/WorkSection';
 import RealEstateSection from './components/RealEstateSection';
 import ContactSection from './components/ContactSection';
-import { ArrowUp, WhatsappLogo, EnvelopeSimple, PhoneCall } from '@phosphor-icons/react';
+import AdminDashboard from './components/AdminDashboard';
+import { ArrowUp, WhatsappLogo, EnvelopeSimple, PhoneCall, LockKey } from '@phosphor-icons/react';
 
 export default function App() {
+  const [showAdmin, setShowAdmin] = useState(() => {
+    return window.location.hash === '#admin' || window.location.pathname === '/admin';
+  });
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#admin') {
+        setShowAdmin(true);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleCloseAdmin = () => {
+    setShowAdmin(false);
+    if (window.location.hash === '#admin') {
+      history.replaceState(null, '', ' ');
+    }
   };
 
   return (
@@ -79,9 +101,24 @@ export default function App() {
 
         <div className="max-w-[1360px] mx-auto mt-6 pt-6 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-ink-muted text-center sm:text-left">
           <span>&copy; {new Date().getFullYear()} Aanuore. All rights reserved.</span>
-          <span>Creating. Communicating. Connecting.</span>
+          
+          <div className="flex items-center gap-3">
+            <span>Creating. Communicating. Connecting.</span>
+            <span>•</span>
+            <button
+              onClick={() => setShowAdmin(true)}
+              className="hover:text-black transition-colors cursor-pointer flex items-center gap-1 opacity-60 hover:opacity-100"
+              title="Owner Portal"
+            >
+              <LockKey size={12} weight="fill" />
+              <span>Studio Admin</span>
+            </button>
+          </div>
         </div>
       </footer>
+
+      {/* ── ADMIN STUDIO MODAL ── */}
+      {showAdmin && <AdminDashboard onClose={handleCloseAdmin} />}
     </div>
   );
 }
