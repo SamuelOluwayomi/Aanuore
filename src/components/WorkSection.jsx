@@ -103,21 +103,47 @@ export default function WorkSection() {
   // Touch Swipe on Stage
   const stageTouchStartX = useRef(0);
   const stageTouchEndX = useRef(0);
-  const handleStageTouchStart = (e) => { stageTouchStartX.current = e.targetTouches[0].clientX; };
-  const handleStageTouchMove = (e) => { stageTouchEndX.current = e.targetTouches[0].clientX; };
+  const isSwiping = useRef(false);
+
+  const handleStageTouchStart = (e) => {
+    stageTouchStartX.current = e.targetTouches[0].clientX;
+    stageTouchEndX.current = e.targetTouches[0].clientX;
+    isSwiping.current = false;
+  };
+
+  const handleStageTouchMove = (e) => {
+    stageTouchEndX.current = e.targetTouches[0].clientX;
+    if (Math.abs(stageTouchStartX.current - stageTouchEndX.current) > 12) {
+      isSwiping.current = true;
+    }
+  };
+
   const handleStageTouchEnd = () => {
-    if (stageTouchStartX.current - stageTouchEndX.current > 40) manualNavigate(handleNext);
-    if (stageTouchStartX.current - stageTouchEndX.current < -40) manualNavigate(handlePrev);
+    const diff = stageTouchStartX.current - stageTouchEndX.current;
+    if (diff > 45) {
+      manualNavigate(handleNext);
+    } else if (diff < -45) {
+      manualNavigate(handlePrev);
+    }
   };
 
   // Touch Swipe for Lightbox
   const lightboxTouchStartX = useRef(0);
   const lightboxTouchEndX = useRef(0);
-  const handleLightboxTouchStart = (e) => { lightboxTouchStartX.current = e.targetTouches[0].clientX; };
-  const handleLightboxTouchMove = (e) => { lightboxTouchEndX.current = e.targetTouches[0].clientX; };
+
+  const handleLightboxTouchStart = (e) => {
+    lightboxTouchStartX.current = e.targetTouches[0].clientX;
+    lightboxTouchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleLightboxTouchMove = (e) => {
+    lightboxTouchEndX.current = e.targetTouches[0].clientX;
+  };
+
   const handleLightboxTouchEnd = () => {
-    if (lightboxTouchStartX.current - lightboxTouchEndX.current > 40) navigateLightbox(1);
-    if (lightboxTouchStartX.current - lightboxTouchEndX.current < -40) navigateLightbox(-1);
+    const diff = lightboxTouchStartX.current - lightboxTouchEndX.current;
+    if (diff > 45) navigateLightbox(1);
+    if (diff < -45) navigateLightbox(-1);
   };
 
   // Keyboard nav
@@ -221,7 +247,8 @@ export default function WorkSection() {
             return (
               <div
                 key={item.id}
-                onClick={() => {
+                onClick={(e) => {
+                  if (isSwiping.current) return;
                   if (isCenter) {
                     setLightboxIndex(idx);
                   } else {
