@@ -123,72 +123,100 @@ export default function Hero() {
         </div>
       </header>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Navigation Modal Overlay (Floats OVER content, clicking outside closes) */}
       {mobileMenuOpen && (
-        <div className="md:hidden mx-4 my-2 p-5 bg-white border-2 border-black rounded-2xl shadow-xl flex flex-col gap-3 relative z-40 animate-in fade-in duration-200">
-          <a
-            href="#work"
-            onClick={() => setMobileMenuOpen(false)}
-            className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 border-b border-black/10 flex items-center justify-between"
+        <div 
+          onClick={() => setMobileMenuOpen(false)}
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-start justify-center p-4 pt-16 sm:pt-20 animate-in fade-in duration-200"
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-sm bg-[#faf8f2] border-2 border-black rounded-3xl p-5 sm:p-6 shadow-2xl flex flex-col gap-2 relative animate-in zoom-in-95 duration-200"
           >
-            <span>Our Work</span>
-            <Camera size={16} weight="bold" className="text-accent-purple" />
-          </a>
-          <a
-            href="#realestate"
-            onClick={() => setMobileMenuOpen(false)}
-            className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 border-b border-black/10 flex items-center justify-between"
-          >
-            <span>Real Estate</span>
-            <House size={16} weight="bold" className="text-accent-purple" />
-          </a>
-          <a
-            href="#about"
-            onClick={() => setMobileMenuOpen(false)}
-            className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 border-b border-black/10 flex items-center justify-between"
-          >
-            <span>About Aanuore</span>
-            <Globe size={16} weight="bold" className="text-accent-purple" />
-          </a>
-          <a
-            href="#services"
-            onClick={() => setMobileMenuOpen(false)}
-            className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 border-b border-black/10 flex items-center justify-between"
-          >
-            <span>Services</span>
-            <Sparkle size={16} weight="bold" className="text-accent-purple" />
-          </a>
-          <a
-            href="#contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 border-b border-black/10 flex items-center justify-between"
-          >
-            <span>Contact</span>
-            <ArrowUpRight size={16} weight="bold" className="text-accent-purple" />
-          </a>
-          <a
-            href="#contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="mt-1 w-full py-3 bg-accent-purple text-white font-bold rounded-xl text-center text-xs uppercase tracking-wider shadow-sm"
-          >
-            Work With Us
-          </a>
+            {/* Top Row: Title + Close Button */}
+            <div className="flex items-center justify-between pb-3 border-b-2 border-black/10 mb-1">
+              <div className="flex items-center gap-2">
+                <img src="/aanuore-logo.png" alt="Aanuore" className="h-6 w-auto object-contain" />
+                <span className="font-bold text-base tracking-tight text-ink font-display-title">aanuore</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-8 h-8 rounded-full bg-black text-white hover:bg-accent-yellow hover:text-black transition-colors flex items-center justify-center cursor-pointer"
+                aria-label="Close menu"
+              >
+                <X size={16} weight="bold" />
+              </button>
+            </div>
+
+            {/* Menu Links */}
+            <a
+              href="#work"
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 px-3 rounded-xl hover:bg-black hover:text-white transition-all flex items-center justify-between group"
+            >
+              <span>Our Work</span>
+              <Camera size={16} weight="bold" className="text-accent-purple group-hover:text-accent-yellow transition-colors" />
+            </a>
+            <a
+              href="#realestate"
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 px-3 rounded-xl hover:bg-black hover:text-white transition-all flex items-center justify-between group"
+            >
+              <span>Real Estate</span>
+              <House size={16} weight="bold" className="text-accent-purple group-hover:text-accent-yellow transition-colors" />
+            </a>
+            <a
+              href="#about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 px-3 rounded-xl hover:bg-black hover:text-white transition-all flex items-center justify-between group"
+            >
+              <span>About Aanuore</span>
+              <Globe size={16} weight="bold" className="text-accent-purple group-hover:text-accent-yellow transition-colors" />
+            </a>
+            <a
+              href="#services"
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 px-3 rounded-xl hover:bg-black hover:text-white transition-all flex items-center justify-between group"
+            >
+              <span>Services</span>
+              <Sparkle size={16} weight="bold" className="text-accent-purple group-hover:text-accent-yellow transition-colors" />
+            </a>
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-bold text-xs text-ink uppercase tracking-wider py-2.5 px-3 rounded-xl hover:bg-black hover:text-white transition-all flex items-center justify-between group"
+            >
+              <span>Contact</span>
+              <ArrowUpRight size={16} weight="bold" className="text-accent-purple group-hover:text-accent-yellow transition-colors" />
+            </a>
+
+            {/* Action CTA Button */}
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mt-2 w-full py-3 bg-black hover:bg-accent-yellow text-white hover:text-black border-2 border-black font-bold rounded-2xl text-center text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>Work With Us</span>
+              <ArrowUpRight size={14} weight="bold" />
+            </a>
+          </div>
         </div>
       )}
 
       {/* ── MAIN HERO BODY ── */}
-      <main className="w-full max-w-[1360px] mx-auto px-4 sm:px-8 md:px-12 py-4 sm:py-6 grow flex flex-col justify-center relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+      <main className="w-full max-w-[1360px] mx-auto px-3 sm:px-8 md:px-12 py-3 sm:py-6 grow flex flex-col justify-center relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-stretch">
 
           {/* LEFT COLUMN: Motto, Giant Headline & Landscape Card */}
           <div className="lg:col-span-7 flex flex-col justify-between">
 
             {/* Top Motto Line with Earth SVG Visual Anchor */}
-            <div className="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs font-bold text-ink-muted uppercase tracking-[0.2em] mb-2 sm:mb-3">
+            <div className="flex items-center gap-1.5 sm:gap-3 text-[10px] sm:text-xs font-bold text-ink-muted uppercase tracking-[0.14em] sm:tracking-[0.2em] mb-1.5 sm:mb-3 flex-wrap">
               <img
                 src="/earth.svg"
                 alt=""
-                className="w-6 h-6 object-contain drop-shadow-sm -rotate-6"
+                className="w-5 h-5 sm:w-6 sm:h-6 object-contain drop-shadow-xs -rotate-6"
               />
               <span>Real Estate</span>
               <span className="text-accent-purple">•</span>
@@ -199,24 +227,24 @@ export default function Hero() {
 
             {/* Giant Condensed Headline with Prominent Sparkles SVG */}
             <div className="relative z-20">
-              <h1 className="font-condensed text-6xl sm:text-7xl md:text-8xl lg:text-[100px] text-ink uppercase leading-[0.86] tracking-tight">
+              <h1 className="font-condensed text-5xl sm:text-7xl md:text-8xl lg:text-[100px] text-ink uppercase leading-[0.88] sm:leading-[0.86] tracking-tight">
                 CREATING.<br />
                 COMMUNICATING.<br />
                 CONNECTING.
               </h1>
 
               {/* High-Visibility Golden Sparkles SVG on headline */}
-              <div className="absolute -top-6 right-6 sm:right-20 pointer-events-none drop-shadow-md z-30">
-                <img src="/sparkles.svg" alt="" className="w-12 h-12 sm:w-16 sm:h-16 animate-pulse" />
+              <div className="absolute -top-4 sm:-top-6 right-2 sm:right-20 pointer-events-none drop-shadow-md z-30">
+                <img src="/sparkles.svg" alt="" className="w-10 h-10 sm:w-16 sm:h-16 animate-pulse" />
               </div>
             </div>
 
             {/* Bottom Left Card: hero2.jpg (Landscape Card with House SVG Sticker) */}
-            <div className="relative mt-6 sm:mt-8 z-10">
+            <div className="relative mt-4 sm:mt-8 z-10">
               <div className="relative border-2 border-black bg-white chamfer-card-tr overflow-hidden shadow-md">
 
                 {/* Photo container */}
-                <div className="relative aspect-16/10 sm:aspect-video max-h-[350px] w-full overflow-hidden bg-neutral-100">
+                <div className="relative aspect-16/10 sm:aspect-video max-h-[260px] sm:max-h-[350px] w-full overflow-hidden bg-neutral-100">
                   <img
                     src="/hero2.jpg"
                     alt="Aanuore Real Estate and Architectural Showcase"
@@ -224,33 +252,33 @@ export default function Hero() {
                   />
 
                   {/* Gradient overlay for readability */}
-                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
 
                   {/* Overlaid Details directly on bottom of image */}
-                  <div className="absolute bottom-3.5 left-4 right-14 text-white z-10 flex flex-col gap-1">
-                    <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold tracking-wide uppercase text-accent-yellow">
-                      <House size={15} weight="bold" />
+                  <div className="absolute bottom-3 left-3 sm:bottom-3.5 sm:left-4 right-12 sm:right-14 text-white z-10 flex flex-col gap-0.5 sm:gap-1">
+                    <div className="flex items-center gap-1.5 text-[9.5px] sm:text-xs font-bold tracking-wide uppercase text-accent-yellow">
+                      <House size={14} weight="bold" />
                       <span>Property Visuals & Architectural Spaces</span>
                     </div>
-                    <p className="text-[11px] sm:text-xs text-white/90 font-medium leading-snug line-clamp-2">
+                    <p className="text-[10.5px] sm:text-xs text-white/90 font-medium leading-snug line-clamp-2">
                       Presenting high value properties with clean editorial composition and intention.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Yellow Attached Pill Sticker (Inspired by Crypko "CREATE ANIME" pill) */}
-              <div className="absolute -right-2.5 top-1/2 -translate-y-1/2 bg-accent-yellow border-2 border-black rounded-2xl py-3 px-2 shadow-md flex flex-col items-center gap-1 z-20">
-                <House size={16} weight="bold" className="text-black" />
-                <span className="text-[8.5px] font-black uppercase tracking-tighter text-black [writing-mode:vertical-lr] text-center leading-tight">
+              {/* Yellow Attached Pill Sticker */}
+              <div className="absolute -right-2 top-1/2 -translate-y-1/2 bg-accent-yellow border-2 border-black rounded-xl sm:rounded-2xl py-2 px-1.5 sm:py-3 sm:px-2 shadow-md flex flex-col items-center gap-1 z-20">
+                <House size={14} weight="bold" className="text-black" />
+                <span className="text-[8px] sm:text-[8.5px] font-black uppercase tracking-tighter text-black [writing-mode:vertical-lr] text-center leading-tight">
                   SPACES
                 </span>
               </div>
 
-              {/* Prominent Architectural House SVG Badge (Positioned at top-left corner so text is unobstructed) */}
-              <div className="absolute -top-5 -left-3 z-30 pointer-events-none drop-shadow-lg">
-                <div className="bg-white/95 border-2 border-black p-1 rounded-2xl shadow-md rotate-[-4deg]">
-                  <img src="/house.svg" alt="" className="w-11 h-11 sm:w-13 sm:h-13" />
+              {/* Prominent Architectural House SVG Badge */}
+              <div className="absolute -top-4 -left-2 sm:-top-5 sm:-left-3 z-30 pointer-events-none drop-shadow-md">
+                <div className="bg-white/95 border-2 border-black p-1 rounded-xl sm:rounded-2xl shadow-md rotate-[-4deg]">
+                  <img src="/house.svg" alt="" className="w-9 h-9 sm:w-13 sm:h-13" />
                 </div>
               </div>
             </div>
@@ -258,7 +286,7 @@ export default function Hero() {
           </div>
 
           {/* RIGHT COLUMN: Portrait Card, Rotating Stamp, & Info Card Box */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-5 relative">
+          <div className="lg:col-span-5 flex flex-col justify-between gap-4 sm:gap-5 relative">
 
             {/* Center-Right: Real-Time Working Analog Clock & Corner Sparkles */}
             <div className="relative flex items-center justify-between">
@@ -268,29 +296,29 @@ export default function Hero() {
 
               {/* Prominent Golden Sparkles Beautifier near Clock */}
               <div className="drop-shadow-md">
-                <img src="/sparkles.svg" alt="" className="w-12 h-12 sm:w-14 sm:h-14" />
+                <img src="/sparkles.svg" alt="" className="w-10 h-10 sm:w-14 sm:h-14" />
               </div>
             </div>
 
             {/* Top Right Card: hero1.jpg (Portrait Photo Card with Overlay & Yellow Strip) */}
             <div className="relative">
 
-              {/* Framed Retro Camera Badge (Strategically pairs with house badge on real estate card) */}
-              <div className="absolute -top-5 -left-3 z-30 pointer-events-none drop-shadow-lg">
-                <div className="bg-white/95 border-2 border-black p-1.5 rounded-2xl shadow-md rotate-[4deg]">
-                  <img src="/camera.png" alt="Photography" className="w-10 h-10 sm:w-12 sm:h-12 object-contain" />
+              {/* Framed Retro Camera Badge */}
+              <div className="absolute -top-4 -left-2 sm:-top-5 sm:-left-3 z-30 pointer-events-none drop-shadow-md">
+                <div className="bg-white/95 border-2 border-black p-1 sm:p-1.5 rounded-xl sm:rounded-2xl shadow-md rotate-[4deg]">
+                  <img src="/camera.png" alt="Photography" className="w-9 h-9 sm:w-12 sm:h-12 object-contain" />
                 </div>
               </div>
 
               {/* Floating Sparkles Badge on Top-Right Corner of Portrait Card */}
-              <div className="absolute -top-4 -right-3 z-30 pointer-events-none drop-shadow-md">
-                <img src="/sparkles.svg" alt="" className="w-10 h-10 sm:w-12 sm:h-12" />
+              <div className="absolute -top-3 -right-2 sm:-top-4 sm:-right-3 z-30 pointer-events-none drop-shadow-md">
+                <img src="/sparkles.svg" alt="" className="w-8 h-8 sm:w-12 sm:h-12" />
               </div>
 
               <div className="border-2 border-black bg-white chamfer-card-tl overflow-hidden shadow-md relative flex">
 
                 {/* Image Container with Dark Bottom Overlay */}
-                <div className="relative w-full aspect-4/5 sm:aspect-3/4 max-h-[350px] overflow-hidden bg-neutral-100">
+                <div className="relative w-full aspect-4/5 sm:aspect-3/4 max-h-[280px] sm:max-h-[350px] overflow-hidden bg-neutral-100">
                   <img
                     src="/hero1.jpg"
                     alt="Aanuoluwapo Ajoke Oreoluwa Koleosho"
@@ -299,8 +327,8 @@ export default function Hero() {
                   <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent pointer-events-none" />
 
                   {/* Overlaid Title & Name Badge on Portrait Photo */}
-                  <div className="absolute bottom-3.5 left-3.5 right-3 text-white z-10 flex flex-col gap-0.5">
-                    <div className="text-[9.5px] font-bold uppercase tracking-widest text-accent-yellow flex items-center gap-1">
+                  <div className="absolute bottom-3 left-3 sm:bottom-3.5 sm:left-3.5 right-3 text-white z-10 flex flex-col gap-0.5">
+                    <div className="text-[9px] sm:text-[9.5px] font-bold uppercase tracking-widest text-accent-yellow flex items-center gap-1">
                       <Camera size={12} weight="bold" />
                       <span>Creative Direction</span>
                     </div>
@@ -311,21 +339,21 @@ export default function Hero() {
                 </div>
 
                 {/* Vertical Yellow Accent Strip on Right Edge */}
-                <div className="w-7 sm:w-8 bg-accent-yellow border-l-2 border-black flex flex-col items-center justify-between py-3 shrink-0">
+                <div className="w-6 sm:w-8 bg-accent-yellow border-l-2 border-black flex flex-col items-center justify-between py-2.5 sm:py-3 shrink-0">
                   <div className="flex flex-col items-center gap-0.5">
-                    <Star size={10} weight="fill" className="text-black" />
-                    <Star size={10} weight="fill" className="text-black" />
+                    <Star size={9} weight="fill" className="text-black" />
+                    <Star size={9} weight="fill" className="text-black" />
                   </div>
-                  <span className="text-[8.5px] font-black uppercase tracking-widest text-black [writing-mode:vertical-lr] rotate-180">
+                  <span className="text-[8px] sm:text-[8.5px] font-black uppercase tracking-widest text-black [writing-mode:vertical-lr] rotate-180">
                     PORTRAITS
                   </span>
-                  <ArrowUpRight size={12} weight="bold" className="text-black" />
+                  <ArrowUpRight size={11} weight="bold" className="text-black" />
                 </div>
               </div>
             </div>
 
-            {/* Bottom Right Info Box (Space-Efficient Tabbed Card) */}
-            <div className="bg-white border-2 border-black rounded-2xl p-4 sm:p-5 shadow-md relative z-20">
+            {/* Bottom Right Info Box */}
+            <div className="bg-white border-2 border-black rounded-2xl p-3.5 sm:p-5 shadow-md relative z-20">
 
               {/* Header */}
               <div className="flex items-center justify-between mb-2 border-b border-black/10 pb-1.5">
@@ -340,7 +368,7 @@ export default function Hero() {
               </div>
 
               {/* Subtext description */}
-              <p className="text-[11px] sm:text-xs text-ink leading-relaxed font-medium mb-3.5">
+              <p className="text-[10.5px] sm:text-xs text-ink leading-relaxed font-medium mb-3">
                 We transform ideas into compelling stories, brands into experiences, and opportunities into connections.
               </p>
 
@@ -358,7 +386,7 @@ export default function Hero() {
                 <div className="flex items-center gap-2">
                   <a
                     href="#work"
-                    className="bg-black hover:bg-accent-purple text-white text-[11px] font-bold px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm transition-colors"
+                    className="bg-black hover:bg-accent-yellow hover:text-black text-white text-[11px] font-bold px-3.5 sm:px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm transition-colors"
                   >
                     <span>Explore</span>
                     <ArrowRight size={13} weight="bold" />
