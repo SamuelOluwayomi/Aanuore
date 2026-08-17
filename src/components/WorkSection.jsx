@@ -27,12 +27,11 @@ export default function WorkSection() {
     { id: 12, image: '/pictures/IMG-20260814-WA0071.jpg', serial: '12' },
     { id: 13, image: '/pictures/IMG-20260814-WA0084.jpg', serial: '13' },
     { id: 14, image: '/pictures/IMG-20260814-WA0091.jpg', serial: '14' },
-    { id: 15, image: '/pictures/IMG-20260814-WA0095.jpg', serial: '15' },
-    { id: 16, image: '/pictures/IMG-20260814-WA0099.jpg', serial: '16' },
-    { id: 17, image: '/pictures/IMG-20260814-WA0100.jpg', serial: '17' },
-    { id: 18, image: '/pictures/IMG-20260814-WA0103.jpg', serial: '18' },
-    { id: 19, image: '/pictures/IMG-20260814-WA0105.jpg', serial: '19' },
-    { id: 20, image: '/pictures/IMG-20260814-WA0107.jpg', serial: '20' }
+    { id: 15, image: '/pictures/IMG-20260814-WA0099.jpg', serial: '15' },
+    { id: 16, image: '/pictures/IMG-20260814-WA0100.jpg', serial: '16' },
+    { id: 17, image: '/pictures/IMG-20260814-WA0103.jpg', serial: '17' },
+    { id: 18, image: '/pictures/IMG-20260814-WA0105.jpg', serial: '18' },
+    { id: 19, image: '/pictures/IMG-20260814-WA0107.jpg', serial: '19' }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -348,7 +348,7 @@ export default function RealEstateSection() {
             </div>
 
             <a
-              href="#contact"
+              href="mailto:anuoluwapokoleosho5@gmail.com?subject=Real%20Estate%20Inquiry%20-%20Aanuore"
               className="bg-black hover:bg-accent-yellow hover:text-black text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-6 sm:px-8 py-3.5 rounded-full flex items-center gap-2 shadow-md transition-all duration-200 shrink-0 active:scale-95 border-2 border-black cursor-pointer"
             >
               <span>Inquire on Real Estate</span>
