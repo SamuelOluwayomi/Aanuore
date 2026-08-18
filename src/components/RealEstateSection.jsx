@@ -26,7 +26,7 @@ export default function RealEstateSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-black/15">
 
           {/* Left Cell: Headline & Brand Narrative (8 cols) */}
-          <div className="lg:col-span-8 p-5 sm:p-10 md:p-14 lg:border-r border-black/15 flex flex-col justify-center">
+          <div className="lg:col-span-8 p-5 sm:p-10 md:p-14 lg:border-r border-black/15 flex flex-col justify-center" data-reveal>
             <div>
 
               {/* Category Tag */}
@@ -68,11 +68,11 @@ export default function RealEstateSection() {
           </div>
 
           {/* Right Cell: Portrait Photo of Aanu on Site (4 cols - Snug with No Dead Space) */}
-          <div className="lg:col-span-4 p-4 sm:p-8 flex items-center justify-center bg-[#f2eee4]">
+          <div className="lg:col-span-4 p-4 sm:p-8 flex items-center justify-center bg-[#f2eee4]" data-reveal data-reveal-delay="150">
             <div className="relative group w-full max-w-xs sm:max-w-sm">
 
               {/* Car Badge on top-left of photo */}
-              <div className="absolute -top-3.5 -left-2.5 sm:-top-4 sm:-left-3 z-30 pointer-events-none drop-shadow-md">
+              <div className="absolute -top-3.5 -left-2.5 sm:-top-4 sm:-left-3 z-20 pointer-events-none drop-shadow-md">
                 <div className="bg-accent-yellow border-2 border-black p-1 sm:p-1.5 rounded-xl sm:rounded-2xl shadow-sm -rotate-6">
                   <img src="/car2.svg" alt="On Site Inspection" className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
                 </div>
@@ -100,8 +100,8 @@ export default function RealEstateSection() {
                   </span>
                 </div>
               </div>
-
             </div>
+
           </div>
 
         </div>
@@ -110,7 +110,7 @@ export default function RealEstateSection() {
         <div className="grid grid-cols-1 md:grid-cols-12 border-b border-black/15 bg-white">
 
           {/* Card 1: Buy To Resell Scheme (Large Spanning Left Block - 7 cols) */}
-          <div className="md:col-span-7 p-5 sm:p-10 md:p-12 md:border-r border-b border-black/15 flex flex-col justify-between group hover:bg-[#faf7f0] transition-colors relative">
+          <div className="md:col-span-7 p-5 sm:p-10 md:p-12 md:border-r border-b border-black/15 flex flex-col justify-between group hover:bg-[#faf7f0] transition-colors relative" data-reveal>
             <div>
               <div className="flex items-center justify-between mb-4 sm:mb-6">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white border-2 border-black/15 p-2.5 sm:p-3 flex items-center justify-center group-hover:bg-accent-yellow transition-colors shadow-sm">
@@ -163,7 +163,7 @@ export default function RealEstateSection() {
           </div>
 
           {/* Card 2: On-Site Field Verification Showcase (5 cols) */}
-          <div className="md:col-span-5 p-6 sm:p-10 flex flex-col items-center justify-center bg-[#f7f4ec] border-b border-black/15 relative overflow-hidden group">
+          <div className="md:col-span-5 p-6 sm:p-10 flex flex-col items-center justify-center bg-[#f7f4ec] border-b border-black/15 relative overflow-hidden group" data-reveal data-reveal-delay="150">
 
             {/* Background Twist SVG Decoration */}
             <div className="absolute top-4 right-4 pointer-events-none opacity-40">
@@ -208,7 +208,7 @@ export default function RealEstateSection() {
           </div>
 
           {/* Card 3: Prime Estate Plots - Now Selling (4 cols) */}
-          <div className="md:col-span-4 p-5 sm:p-8 md:p-10 md:border-r border-b md:border-b-0 border-black/15 flex flex-col justify-between group hover:bg-[#faf7f0] transition-colors">
+          <div className="md:col-span-4 p-5 sm:p-8 md:p-10 md:border-r border-b md:border-b-0 border-black/15 flex flex-col justify-between group hover:bg-[#faf7f0] transition-colors" data-reveal>
             <div>
               <div className="flex items-center justify-between mb-4 sm:mb-5">
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white border-2 border-black/15 p-2 sm:p-2.5 flex items-center justify-center group-hover:bg-accent-yellow transition-colors shadow-2xs">
@@ -250,7 +250,7 @@ export default function RealEstateSection() {
           </div>
 
           {/* Card 4: Trustline Investment Note (4 cols) */}
-          <div className="md:col-span-4 p-5 sm:p-8 md:p-10 md:border-r border-b md:border-b-0 border-black/15 flex flex-col justify-between group hover:bg-[#faf7f0] transition-colors">
+          <div className="md:col-span-4 p-5 sm:p-8 md:p-10 md:border-r border-b md:border-b-0 border-black/15 flex flex-col justify-between group hover:bg-[#faf7f0] transition-colors" data-reveal data-reveal-delay="100">
             <div>
               <div className="flex items-center justify-between mb-4 sm:mb-5">
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white border-2 border-black/15 p-2 sm:p-2.5 flex items-center justify-center group-hover:bg-accent-yellow transition-colors shadow-2xs">
@@ -292,7 +292,7 @@ export default function RealEstateSection() {
           </div>
 
           {/* Card 5: Dividend Payment & Yield (4 cols) */}
-          <div className="md:col-span-4 p-5 sm:p-8 md:p-10 flex flex-col justify-between group hover:bg-[#faf7f0] transition-colors">
+          <div className="md:col-span-4 p-5 sm:p-8 md:p-10 flex flex-col justify-between group hover:bg-[#faf7f0] transition-colors" data-reveal data-reveal-delay="200">
             <div>
               <div className="flex items-center justify-between mb-4 sm:mb-5">
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white border-2 border-black/15 p-2 sm:p-2.5 flex items-center justify-center group-hover:bg-accent-yellow transition-colors shadow-2xs">
@@ -336,7 +336,7 @@ export default function RealEstateSection() {
         </div>
 
         {/* ── ROW 3: CLOSING REAL ESTATE CALL TO ACTION BANNER ── */}
-        <div className="p-4 sm:p-10 md:p-14">
+        <div className="p-4 sm:p-10 md:p-14" data-reveal>
           <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-12 border-2 border-black shadow-lg relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover-glow">
             <div>
               <h3 className="font-condensed text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-ink leading-none mb-2">

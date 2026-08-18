@@ -195,7 +195,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-stretch">
 
           {/* LEFT COLUMN: Motto, Giant Headline & Landscape Card */}
-          <div className="lg:col-span-7 flex flex-col justify-between">
+          <div className="lg:col-span-7 flex flex-col justify-between animate-hero-entrance">
 
             {/* Top Motto Line with Earth SVG Visual Anchor */}
             <div className="flex items-center gap-1.5 sm:gap-3 text-[10px] sm:text-xs font-bold text-ink-muted uppercase tracking-[0.14em] sm:tracking-[0.2em] mb-1.5 sm:mb-3 flex-wrap">
@@ -226,7 +226,7 @@ export default function Hero() {
             </div>
 
             {/* Bottom Left Card: hero2.jpg (Landscape Card with House SVG Sticker) */}
-            <div className="relative mt-4 sm:mt-8 z-10">
+            <div className="relative mt-4 sm:mt-8 z-10 animate-hero-card">
               <div className="relative border-2 border-black bg-white chamfer-card-tr overflow-hidden shadow-md hover-glow cursor-pointer">
 
                 {/* Photo container */}
@@ -287,7 +287,7 @@ export default function Hero() {
             </div>
 
             {/* Top Right Card: hero1.jpg (Portrait Photo Card with Overlay & Yellow Strip) */}
-            <div className="relative">
+            <div className="relative animate-hero-card">
 
               {/* Framed Retro Camera Badge */}
               <div className="absolute -top-4 -left-2 sm:-top-5 sm:-left-3 z-30 pointer-events-none drop-shadow-md">
@@ -339,7 +339,7 @@ export default function Hero() {
             </div>
 
             {/* Bottom Right Info Box */}
-            <div className="bg-white border-2 border-black rounded-2xl p-3.5 sm:p-5 shadow-md relative z-20 hover-glow cursor-pointer">
+            <div className="bg-white border-2 border-black rounded-2xl p-3.5 sm:p-5 shadow-md relative z-20 hover-glow cursor-pointer animate-hero-card">
 
               {/* Header */}
               <div className="flex items-center justify-between mb-2 border-b border-black/10 pb-1.5">

@@ -5,6 +5,7 @@ import WorkSection from './components/WorkSection';
 import RealEstateSection from './components/RealEstateSection';
 import ContactSection from './components/ContactSection';
 import AdminDashboard from './components/AdminDashboard';
+import { useScrollReveal } from './hooks/useScrollReveal';
 import {
   ArrowUp,
   WhatsappLogo,
@@ -21,6 +22,8 @@ import {
 } from '@phosphor-icons/react';
 
 export default function App() {
+  useScrollReveal();
+
   const [showAdmin, setShowAdmin] = useState(() => {
     return window.location.hash === '#admin' || window.location.pathname === '/admin';
   });
@@ -58,7 +61,7 @@ export default function App() {
 
       {/* ── RICH FOOTER ── */}
       <footer className="py-12 px-5 sm:px-10 border-t-2 border-black/15 bg-[#ede9df]">
-        <div className="max-w-[1360px] mx-auto">
+        <div className="max-w-[1360px] mx-auto" data-reveal>
           
           {/* Main Content Row */}
           <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 pb-8">

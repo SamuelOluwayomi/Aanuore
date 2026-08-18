@@ -47,7 +47,7 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-black/15">
 
           {/* Left Column: Direct Channels & Narrative (5 cols) */}
-          <div className="lg:col-span-5 p-6 sm:p-10 md:p-12 lg:border-r border-b lg:border-b-0 border-black/15 flex flex-col justify-between">
+          <div className="lg:col-span-5 p-6 sm:p-10 md:p-12 lg:border-r border-b lg:border-b-0 border-black/15 flex flex-col justify-between" data-reveal>
             <div>
 
               {/* Terminal Style Tag */}
@@ -214,7 +214,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right Column: Clean Editorial Inquiry Form (7 cols) */}
-          <div className="lg:col-span-7 p-6 sm:p-10 md:p-12 bg-white flex flex-col justify-center">
+          <div className="lg:col-span-7 p-6 sm:p-10 md:p-12 bg-white flex flex-col justify-center" data-reveal data-reveal-delay="150">
 
             <form onSubmit={handleSubmit} className="space-y-5 max-w-xl">
 

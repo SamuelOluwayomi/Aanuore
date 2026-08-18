@@ -183,7 +183,7 @@ export default function WorkSection() {
       <div className="max-w-[1400px] mx-auto relative z-10">
 
         {/* ── SECTION HEADER ── */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-4 sm:mb-6 border-b border-black/15 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-4 sm:mb-6 border-b border-black/15 pb-4" data-reveal>
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-ink-muted uppercase tracking-[0.25em] mb-2.5">
               <Sparkle size={13} weight="fill" className="text-accent-purple" />
