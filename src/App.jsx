@@ -5,7 +5,16 @@ import WorkSection from './components/WorkSection';
 import RealEstateSection from './components/RealEstateSection';
 import ContactSection from './components/ContactSection';
 import AdminDashboard from './components/AdminDashboard';
-import { ArrowUp, WhatsappLogo, EnvelopeSimple, PhoneCall, LockKey } from '@phosphor-icons/react';
+import {
+  ArrowUp,
+  WhatsappLogo,
+  EnvelopeSimple,
+  PhoneCall,
+  LockKey,
+  GithubLogo,
+  XLogo,
+  TelegramLogo
+} from '@phosphor-icons/react';
 
 export default function App() {
   const [showAdmin, setShowAdmin] = useState(() => {
@@ -44,76 +53,159 @@ export default function App() {
       </main>
 
       {/* ── RICH FOOTER ── */}
-      <footer className="py-10 px-5 sm:px-10 border-t-2 border-black/15 bg-[#ede9df]">
-        <div className="max-w-[1360px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <footer className="py-12 px-5 sm:px-10 border-t-2 border-black/15 bg-[#ede9df]">
+        <div className="max-w-[1360px] mx-auto">
           
-          {/* Brand & Name */}
-          <div className="flex flex-col items-center md:items-start gap-1">
-            <div className="flex items-center gap-2">
-              <img src="/aanuore-logo.png" alt="Aanuore" className="h-6 w-auto object-contain" />
-              <span className="font-bold text-lg text-ink font-display-title">
-                aanuore
-              </span>
+          {/* Main Content Row */}
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 pb-8">
+            
+            {/* Left: Brand Info & Contact Actions */}
+            <div className="flex flex-col items-center lg:items-start gap-4">
+              <div>
+                <div className="flex items-center justify-center lg:justify-start gap-2.5">
+                  <img src="/aanuore-logo.png" alt="Aanuore" className="h-7 w-auto object-contain" />
+                  <span className="font-bold text-2xl text-ink font-display-title">
+                    aanuore
+                  </span>
+                </div>
+                <span className="text-xs font-bold text-ink-muted block text-center lg:text-left mt-0.5">
+                  Aanuoluwapo Ajoke Oreoluwa Koleosho
+                </span>
+              </div>
+
+              {/* Quick Contact Action Buttons */}
+              <div className="flex items-center gap-2.5 text-xs font-bold text-ink flex-wrap justify-center lg:justify-start">
+                <a
+                  href="https://wa.me/2348022218971"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 hover:text-accent-purple transition-colors bg-white px-3.5 py-1.5 rounded-full border border-black/15 shadow-2xs hover-glow-subtle"
+                >
+                  <WhatsappLogo size={15} weight="fill" className="text-[#25D366]" />
+                  <span>WhatsApp Direct</span>
+                </a>
+                <a
+                  href="mailto:anuoluwapokoleosho5@gmail.com"
+                  className="flex items-center gap-1.5 hover:text-accent-purple transition-colors bg-white px-3.5 py-1.5 rounded-full border border-black/15 shadow-2xs hover-glow-subtle"
+                >
+                  <EnvelopeSimple size={15} weight="bold" className="text-accent-purple" />
+                  <span>Send An Email</span>
+                </a>
+                <a
+                  href="tel:+2348022218971"
+                  className="flex items-center gap-1.5 hover:text-accent-purple transition-colors bg-white px-3.5 py-1.5 rounded-full border border-black/15 shadow-2xs hover-glow-subtle"
+                >
+                  <PhoneCall size={14} weight="bold" className="text-black" />
+                  <span>Direct Call</span>
+                </a>
+              </div>
             </div>
-            <span className="text-xs font-bold text-ink-muted">
-              Aanuoluwapo Ajoke Oreoluwa Koleosho
-            </span>
+
+            {/* Right: Developer Card + Back to Top */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto justify-center lg:justify-end">
+              
+              {/* Compact Neo-brutalist Developer Card */}
+              <div className="bg-white border-2 border-black rounded-2xl p-3.5 sm:p-4 shadow-sm hover-glow transition-all max-w-sm sm:max-w-md w-full relative">
+                <div className="flex items-center gap-3.5">
+                  
+                  {/* Samuel's Avatar */}
+                  <div className="relative shrink-0">
+                    <div className="w-12 h-12 rounded-full border-2 border-black overflow-hidden bg-neutral-100 shadow-xs">
+                      <img
+                        src="/me.png"
+                        alt="Samuel Oluwayomi"
+                        className="w-full h-full object-cover object-center"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Developer Details & Contact Links */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <span className="bg-accent-yellow border border-black text-[8px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded -rotate-2 inline-block shadow-2xs">
+                        BUILT BY
+                      </span>
+                    </div>
+
+                    <h4 className="font-bold text-xs sm:text-sm text-ink uppercase tracking-tight truncate font-display-title">
+                      SAMUEL OLUWAYOMI
+                    </h4>
+
+                    {/* Social & Contact Links in 2x2 grid */}
+                    <div className="grid grid-cols-2 gap-x-3 gap-y-1 mt-1 text-[10.5px] font-mono text-ink-muted">
+                      <a
+                        href="https://github.com/SamuelOluwayomi"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-accent-purple flex items-center gap-1 transition-colors truncate"
+                      >
+                        <GithubLogo size={12} weight="bold" className="shrink-0" />
+                        <span className="truncate">SamuelOluwayomi</span>
+                      </a>
+                      <a
+                        href="https://x.com/The_devsam"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-accent-purple flex items-center gap-1 transition-colors truncate"
+                      >
+                        <XLogo size={11} weight="bold" className="shrink-0" />
+                        <span className="truncate">@The_devsam</span>
+                      </a>
+                      <a
+                        href="https://t.me/DevSam01"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-accent-purple flex items-center gap-1 transition-colors truncate"
+                      >
+                        <TelegramLogo size={12} weight="fill" className="text-[#229ED9] shrink-0" />
+                        <span className="truncate">@DevSam01</span>
+                      </a>
+                      <a
+                        href="mailto:samuelfaith500@gmail.com"
+                        className="hover:text-accent-purple flex items-center gap-1 transition-colors truncate"
+                        title="samuelfaith500@gmail.com"
+                      >
+                        <EnvelopeSimple size={12} weight="bold" className="text-accent-purple shrink-0" />
+                        <span className="truncate">Email Me</span>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Back to top button */}
+              <button
+                onClick={scrollToTop}
+                className="w-11 h-11 rounded-2xl bg-black hover:bg-accent-yellow hover:text-black text-white flex items-center justify-center transition-all cursor-pointer shadow-sm border-2 border-black active:scale-95 shrink-0"
+                aria-label="Scroll to top"
+                title="Back to Top"
+              >
+                <ArrowUp size={18} weight="bold" />
+              </button>
+
+            </div>
+
           </div>
 
-          {/* Quick Contact Action Buttons */}
-          <div className="flex items-center gap-3 text-xs font-bold text-ink flex-wrap justify-center">
-            <a 
-              href="https://wa.me/2348022218971" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-accent-purple transition-colors bg-white px-3.5 py-1.5 rounded-full border border-black/15 shadow-2xs hover-glow-subtle"
-            >
-              <WhatsappLogo size={16} weight="fill" className="text-[#25D366]" />
-              <span>WhatsApp Direct</span>
-            </a>
-            <a 
-              href="mailto:anuoluwapokoleosho5@gmail.com" 
-              className="flex items-center gap-1.5 hover:text-accent-purple transition-colors bg-white px-3.5 py-1.5 rounded-full border border-black/15 shadow-2xs hover-glow-subtle"
-            >
-              <EnvelopeSimple size={16} weight="bold" className="text-accent-purple" />
-              <span>Send An Email</span>
-            </a>
-            <a 
-              href="tel:+2348022218971" 
-              className="flex items-center gap-1.5 hover:text-accent-purple transition-colors bg-white px-3.5 py-1.5 rounded-full border border-black/15 shadow-2xs hover-glow-subtle"
-            >
-              <PhoneCall size={15} weight="bold" className="text-black" />
-              <span>Direct Call</span>
-            </a>
+          {/* Bottom Copyright & Admin Status Bar */}
+          <div className="pt-6 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-ink-muted text-center sm:text-left">
+            <span>&copy; {new Date().getFullYear()} Aanuore. All rights reserved.</span>
+
+            <div className="flex items-center gap-3">
+              <span>Creating. Communicating. Connecting.</span>
+              <span>•</span>
+              <button
+                onClick={() => setShowAdmin(true)}
+                className="hover:text-black transition-colors cursor-pointer flex items-center gap-1 opacity-60 hover:opacity-100"
+                title="Owner Portal"
+              >
+                <LockKey size={12} weight="fill" />
+                <span>Studio Admin</span>
+              </button>
+            </div>
           </div>
 
-          {/* Back to top */}
-          <button
-            onClick={scrollToTop}
-            className="w-10 h-10 rounded-full bg-black hover:bg-accent-yellow hover:text-black text-white flex items-center justify-center transition-all cursor-pointer shadow-sm border-2 border-black active:scale-95"
-            aria-label="Scroll to top"
-            title="Back to Top"
-          >
-            <ArrowUp size={16} weight="bold" />
-          </button>
-
-        </div>
-
-        <div className="max-w-[1360px] mx-auto mt-6 pt-6 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-ink-muted text-center sm:text-left">
-          <span>&copy; {new Date().getFullYear()} Aanuore. All rights reserved.</span>
-          
-          <div className="flex items-center gap-3">
-            <span>Creating. Communicating. Connecting.</span>
-            <span>•</span>
-            <button
-              onClick={() => setShowAdmin(true)}
-              className="hover:text-black transition-colors cursor-pointer flex items-center gap-1 opacity-60 hover:opacity-100"
-              title="Owner Portal"
-            >
-              <LockKey size={12} weight="fill" />
-              <span>Studio Admin</span>
-            </button>
-          </div>
         </div>
       </footer>
 
