@@ -6,7 +6,12 @@ import {
   PhoneCall,
   ArrowUpRight,
   PaperPlaneTilt,
-  CheckCircle
+  CheckCircle,
+  InstagramLogo,
+  XLogo,
+  TiktokLogo,
+  LinkedinLogo,
+  FacebookLogo
 } from '@phosphor-icons/react';
 
 export default function ContactSection() {
@@ -47,7 +52,7 @@ export default function ContactSection() {
 
               {/* Terminal Style Tag */}
               <div className="text-[11px] font-mono font-bold tracking-widest text-ink-muted uppercase mb-3">
-                DIRECT CHANNELS
+                // DIRECT CHANNELS //
               </div>
 
               {/* Headline */}
@@ -57,6 +62,7 @@ export default function ContactSection() {
 
               {/* Status Badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border-2 border-black bg-white text-[10px] font-black uppercase tracking-wider text-ink mb-6 shadow-2xs">
+                <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
                 <span>AVAILABLE FOR PROJECTS &amp; CONSULTATIONS</span>
               </div>
 
@@ -138,6 +144,65 @@ export default function ContactSection() {
                   </div>
                 </a>
 
+              </div>
+
+              {/* ── Social Media Channels ── */}
+              <div className="mt-6 pt-5 border-t border-black/10">
+                <div className="text-[10.5px] font-mono font-bold tracking-widest text-ink-muted uppercase mb-3">
+                  // CONNECT &amp; FOLLOW //
+                </div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <a
+                    href="https://www.instagram.com/aanuore_?igsh=azhsMWhrMW43NHF2&utm_source=qr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl bg-white border-2 border-black flex items-center justify-center hover:bg-[#E1306C] hover:text-white text-ink transition-all shadow-2xs hover-glow-subtle"
+                    title="Instagram: @aanuore_"
+                    aria-label="Instagram"
+                  >
+                    <InstagramLogo size={20} weight="bold" />
+                  </a>
+                  <a
+                    href="https://x.com/aanuore?s=11"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white text-ink transition-all shadow-2xs hover-glow-subtle"
+                    title="X: @aanuore"
+                    aria-label="X / Twitter"
+                  >
+                    <XLogo size={18} weight="bold" />
+                  </a>
+                  <a
+                    href="https://www.tiktok.com/@aanuore"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white text-ink transition-all shadow-2xs hover-glow-subtle"
+                    title="TikTok: @aanuore"
+                    aria-label="TikTok"
+                  >
+                    <TiktokLogo size={19} weight="bold" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/aanuoluwapoajokekoleosho01"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl bg-white border-2 border-black flex items-center justify-center hover:bg-[#0077B5] hover:text-white text-ink transition-all shadow-2xs hover-glow-subtle"
+                    title="LinkedIn: Aanuoluwapo Koleosho"
+                    aria-label="LinkedIn"
+                  >
+                    <LinkedinLogo size={19} weight="bold" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/share/1BreyWU9s8/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl bg-white border-2 border-black flex items-center justify-center hover:bg-[#1877F2] hover:text-white text-ink transition-all shadow-2xs hover-glow-subtle"
+                    title="Facebook: Aanuore"
+                    aria-label="Facebook"
+                  >
+                    <FacebookLogo size={20} weight="fill" />
+                  </a>
+                </div>
               </div>
 
             </div>

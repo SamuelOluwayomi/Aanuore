@@ -13,7 +13,11 @@ import {
   LockKey,
   GithubLogo,
   XLogo,
-  TelegramLogo
+  TelegramLogo,
+  InstagramLogo,
+  TiktokLogo,
+  LinkedinLogo,
+  FacebookLogo
 } from '@phosphor-icons/react';
 
 export default function App() {
@@ -59,7 +63,7 @@ export default function App() {
           {/* Main Content Row */}
           <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 pb-8">
             
-            {/* Left: Brand Info & Contact Actions */}
+            {/* Left: Brand Info, Socials & Contact Actions */}
             <div className="flex flex-col items-center lg:items-start gap-4">
               <div>
                 <div className="flex items-center justify-center lg:justify-start gap-2.5">
@@ -71,6 +75,60 @@ export default function App() {
                 <span className="text-xs font-bold text-ink-muted block text-center lg:text-left mt-0.5">
                   Aanuoluwapo Ajoke Oreoluwa Koleosho
                 </span>
+
+                {/* Aanuore Social Media Links */}
+                <div className="flex items-center gap-2 mt-2.5 justify-center lg:justify-start">
+                  <a
+                    href="https://www.instagram.com/aanuore_?igsh=azhsMWhrMW43NHF2&utm_source=qr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-white border border-black/20 flex items-center justify-center hover:bg-[#E1306C] hover:text-white text-ink transition-all shadow-2xs hover-glow-subtle"
+                    title="Instagram: @aanuore_"
+                    aria-label="Instagram"
+                  >
+                    <InstagramLogo size={16} weight="bold" />
+                  </a>
+                  <a
+                    href="https://x.com/aanuore?s=11"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-white border border-black/20 flex items-center justify-center hover:bg-black hover:text-white text-ink transition-all shadow-2xs hover-glow-subtle"
+                    title="X: @aanuore"
+                    aria-label="X / Twitter"
+                  >
+                    <XLogo size={14} weight="bold" />
+                  </a>
+                  <a
+                    href="https://www.tiktok.com/@aanuore"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-white border border-black/20 flex items-center justify-center hover:bg-black hover:text-white text-ink transition-all shadow-2xs hover-glow-subtle"
+                    title="TikTok: @aanuore"
+                    aria-label="TikTok"
+                  >
+                    <TiktokLogo size={15} weight="bold" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/aanuoluwapoajokekoleosho01"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-white border border-black/20 flex items-center justify-center hover:bg-[#0077B5] hover:text-white text-ink transition-all shadow-2xs hover-glow-subtle"
+                    title="LinkedIn: Aanuoluwapo Koleosho"
+                    aria-label="LinkedIn"
+                  >
+                    <LinkedinLogo size={15} weight="bold" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/share/1BreyWU9s8/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-white border border-black/20 flex items-center justify-center hover:bg-[#1877F2] hover:text-white text-ink transition-all shadow-2xs hover-glow-subtle"
+                    title="Facebook: Aanuore"
+                    aria-label="Facebook"
+                  >
+                    <FacebookLogo size={16} weight="fill" />
+                  </a>
+                </div>
               </div>
 
               {/* Quick Contact Action Buttons */}
