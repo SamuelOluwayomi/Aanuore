@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --font-condensed: "Bebas Neue", sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --color-paper: #ede9df;
+  --color-canvas: #ede9df;
+  --color-card-white: #ffffff;
+  --color-ink: #0a0a0a;
+  --color-ink-muted: #646464;
+  --color-accent-purple: #7c3aed;
+  --color-accent-purple-dark: #6d28d9;
+  --color-accent-yellow: #f8db41;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .font-condensed {
+    font-family: var(--font-condensed);
+    letter-spacing: 0.02em;
+  }
+
+  .font-display-title {
+    font-family: var(--font-display);
+  }
+}
+
+/* Signature Purple Border Glow on Hover */
+.hover-glow {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.hover-glow:hover {
+  border-color: #7c3aed !important;
+  box-shadow: 0 0 28px rgba(124, 58, 237, 0.38), 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.hover-glow-subtle {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.hover-glow-subtle:hover {
+  border-color: #7c3aed !important;
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.28) !important;
+}

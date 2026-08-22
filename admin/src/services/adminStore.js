@@ -1,6 +1,7 @@
-import { fetchCloudinaryPortfolio, getCloudinaryConfig } from './cloudinaryService';
+/**
+ * Portfolio Data Store for Standalone Admin Studio
+ */
 
-// Initial bundled portfolio images
 export const DEFAULT_IMAGES = [
   { id: 'wa-0073', image: '/pictures/IMG-20260814-WA0073.jpg', serial: '01', title: 'Studio Session 01' },
   { id: 'wa-0039', image: '/pictures/IMG-20260814-WA0039.jpg', serial: '02', title: 'Studio Session 02' },
@@ -25,11 +26,10 @@ export const DEFAULT_IMAGES = [
 
 const STORAGE_KEY = 'aanuore_portfolio_images_v2';
 
-class PortfolioStore {
+class AdminStore {
   constructor() {
     this.listeners = new Set();
     this.images = this.loadImages();
-    this.syncWithCloudinary();
   }
 
   loadImages() {
@@ -42,22 +42,9 @@ class PortfolioStore {
         }
       }
     } catch (err) {
-      console.warn('Failed to load portfolio images from storage:', err);
+      console.warn('Failed to load portfolio images:', err);
     }
     return [...DEFAULT_IMAGES];
-  }
-
-  async syncWithCloudinary() {
-    const config = getCloudinaryConfig();
-    if (!config.cloudName || config.cloudName === 'aanuore') return;
-
-    const cloudImages = await fetchCloudinaryPortfolio(config.cloudName);
-    if (cloudImages && cloudImages.length > 0) {
-      // Merge Cloudinary images with existing bundled images
-      const existingIds = new Set(cloudImages.map((c) => c.id));
-      const nonCloud = this.images.filter((img) => !existingIds.has(img.id));
-      this.saveImages([...cloudImages, ...nonCloud]);
-    }
   }
 
   saveImages(images) {
@@ -68,7 +55,7 @@ class PortfolioStore {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.images));
     } catch (err) {
-      console.warn('Failed to persist portfolio images to storage:', err);
+      console.warn('Failed to persist portfolio images:', err);
     }
     this.notify();
   }
@@ -77,15 +64,15 @@ class PortfolioStore {
     return this.images;
   }
 
-  addImage(imageUrl, title = '', id = null) {
+  addImage(imageUrl, title = '') {
     const newItem = {
-      id: id || ('img_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7)),
+      id: 'img_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7),
       image: imageUrl,
       serial: (this.images.length + 1).toString().padStart(2, '0'),
       title: title || `Photograph ${(this.images.length + 1).toString().padStart(2, '0')}`,
       createdAt: new Date().toISOString()
     };
-    this.saveImages([newItem, ...this.images]); // Add to beginning of showcase
+    this.saveImages([newItem, ...this.images]);
     return newItem;
   }
 
@@ -106,6 +93,24 @@ class PortfolioStore {
     this.saveImages([...DEFAULT_IMAGES]);
   }
 
+  exportBackup() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.images, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", `aanuore_portfolio_backup_${new Date().toISOString().slice(0, 10)}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  }
+
+  importBackup(jsonData) {
+    if (Array.isArray(jsonData) && jsonData.length > 0) {
+      this.saveImages(jsonData);
+      return true;
+    }
+    return false;
+  }
+
   subscribe(listener) {
     this.listeners.add(listener);
     return () => this.listeners.delete(listener);
@@ -116,5 +121,4 @@ class PortfolioStore {
   }
 }
 
-export const portfolioStore = new PortfolioStore();
-
+export const adminStore = new AdminStore();

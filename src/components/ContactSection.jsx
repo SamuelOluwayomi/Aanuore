@@ -52,7 +52,7 @@ export default function ContactSection() {
 
               {/* Terminal Style Tag */}
               <div className="text-[11px] font-mono font-bold tracking-widest text-ink-muted uppercase mb-3">
-                // DIRECT CHANNELS //
+                DIRECT CHANNELS
               </div>
 
               {/* Headline */}

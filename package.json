@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "admin": "vite admin --port 5174",
+    "admin:build": "vite build admin",
     "lint": "oxlint",
     "preview": "vite preview"
   },
