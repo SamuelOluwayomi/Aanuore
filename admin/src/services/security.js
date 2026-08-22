@@ -92,13 +92,12 @@ export async function verifyPassword(inputPassword) {
     throw new Error(`Account temporarily locked for security. Try again in ${Math.ceil(lockout.remainingSecs / 60)} minutes.`);
   }
 
-  const inputHash = await hashPassword(inputPassword.trim());
-  const storedHash = localStorage.getItem(HASH_STORAGE_KEY);
+  const trimmed = inputPassword.trim();
 
-  // If first-time user hasn't set custom password yet
-  if (!storedHash) {
-    // Check fallback or require setup
-    if (inputPassword === 'Aanuore2026!' || inputPassword === '2026') {
+  // 1. Check if an Environment Variable was set in Vercel / .env (100% immune to cache clearing)
+  const envPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+  if (envPassword) {
+    if (trimmed === envPassword.trim()) {
       resetRateLimit();
       createSession();
       return true;
@@ -107,7 +106,8 @@ export async function verifyPassword(inputPassword) {
     return false;
   }
 
-  if (inputHash === storedHash) {
+  // 2. Fallback default test key only if no custom env password is configured yet
+  if (trimmed === '2026' || trimmed === 'Aanuore2026!') {
     resetRateLimit();
     createSession();
     return true;

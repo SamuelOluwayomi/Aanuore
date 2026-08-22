@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
   LockKey, 
-  Key, 
   ShieldCheck, 
   ShieldWarning, 
   Eye, 
@@ -11,16 +10,11 @@ import {
 } from '@phosphor-icons/react';
 import { 
   verifyPassword, 
-  setMasterPassword, 
-  isPasswordConfigured, 
-  getLockoutStatus 
+  getLockoutStatus
 } from '../services/security';
 
 export default function LockScreen({ onAuthenticated }) {
-  const isFirstTime = !isPasswordConfigured();
-  
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -46,22 +40,6 @@ export default function LockScreen({ onAuthenticated }) {
     setIsLoading(true);
 
     try {
-      if (isFirstTime) {
-        if (password.length < 6) {
-          setErrorMsg('Password must be at least 6 characters.');
-          setIsLoading(false);
-          return;
-        }
-        if (password !== confirmPassword) {
-          setErrorMsg('Passwords do not match.');
-          setIsLoading(false);
-          return;
-        }
-        await setMasterPassword(password);
-        onAuthenticated();
-        return;
-      }
-
       const success = await verifyPassword(password);
       if (success) {
         onAuthenticated();
@@ -71,7 +49,7 @@ export default function LockScreen({ onAuthenticated }) {
         if (status.isLocked) {
           setErrorMsg(`Too many failed attempts. Locked out for ${Math.ceil(status.remainingSecs / 60)} minutes.`);
         } else {
-          setErrorMsg(`Incorrect password. Attempt ${status.attempts} of 5 before lockout.`);
+          setErrorMsg(`Incorrect password. Please verify credentials.`);
         }
       }
     } catch (err) {
@@ -134,16 +112,14 @@ export default function LockScreen({ onAuthenticated }) {
 
           <div className="inline-flex items-center gap-1.5 bg-accent-yellow border-2 border-black px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider text-ink mb-2 -rotate-1 shadow-2xs">
             <Sparkle size={11} weight="fill" className="text-accent-purple" />
-            <span>{isFirstTime ? 'INITIAL SECURITY SETUP' : 'SECURE STUDIO MANAGER'}</span>
+            <span>SECURE STUDIO MANAGER</span>
           </div>
 
           <h1 className="font-condensed text-3xl sm:text-4xl text-ink uppercase tracking-tight leading-none mt-1">
-            {isFirstTime ? 'Create Master Key' : 'Studio Authentication'}
+            Studio Authentication
           </h1>
           <p className="text-xs text-ink-muted mt-1.5 max-w-xs mx-auto">
-            {isFirstTime 
-              ? 'Configure your private master password to protect your portfolio updates.' 
-              : 'Enter master credentials to update photographs and live catalog.'}
+            Enter your master credentials to update photographs and live catalog.
           </p>
         </div>
 
@@ -154,7 +130,7 @@ export default function LockScreen({ onAuthenticated }) {
             <div>
               <span className="font-bold block">Access Temporarily Suspended</span>
               <span className="text-[11px]">
-                Try again in: <strong>{formatLockoutTime(lockout.remainingSecs)}</strong>
+                Too many failed attempts. Try again in: <strong>{formatLockoutTime(lockout.remainingSecs)}</strong>
               </span>
             </div>
           </div>
@@ -164,7 +140,7 @@ export default function LockScreen({ onAuthenticated }) {
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block text-[10.5px] font-mono font-bold uppercase tracking-widest text-ink-muted mb-1.5">
-              // {isFirstTime ? 'NEW MASTER PASSWORD' : 'ENTER MASTER PASSWORD'} //
+              // MASTER PASSWORD //
             </label>
             <div className="relative">
               <input
@@ -172,11 +148,11 @@ export default function LockScreen({ onAuthenticated }) {
                 required
                 autoFocus
                 disabled={lockout.isLocked || isLoading}
-                placeholder={isFirstTime ? 'Min. 6 characters' : '••••••••••••'}
+                placeholder="••••••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={`w-full bg-[#faf8f2] border-2 rounded-2xl px-4 py-3 text-xs sm:text-sm text-ink focus:outline-none transition-all ${
-                  errorMsg ? 'border-red-500' : 'border-black focus:border-accent-purple'
+                  errorMsg ? 'border-red-500' : 'border-black'
                 } ${lockout.isLocked ? 'opacity-50 cursor-not-allowed' : ''}`}
               />
               <button
@@ -189,23 +165,6 @@ export default function LockScreen({ onAuthenticated }) {
               </button>
             </div>
           </div>
-
-          {/* Confirm Password (First Time Only) */}
-          {isFirstTime && (
-            <div>
-              <label className="block text-[10.5px] font-mono font-bold uppercase tracking-widest text-ink-muted mb-1.5">
-                // CONFIRM PASSWORD //
-              </label>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                required
-                placeholder="Re-enter password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full bg-[#faf8f2] border-2 border-black rounded-2xl px-4 py-3 text-xs sm:text-sm text-ink focus:outline-none focus:border-accent-purple transition-all"
-              />
-            </div>
-          )}
 
           {/* Error Message */}
           {errorMsg && (
@@ -222,7 +181,7 @@ export default function LockScreen({ onAuthenticated }) {
               lockout.isLocked || isLoading ? 'opacity-40 cursor-not-allowed' : ''
             }`}
           >
-            <span>{isLoading ? 'Verifying...' : isFirstTime ? 'Set Password & Unlock' : 'Unlock Studio'}</span>
+            <span>{isLoading ? 'Verifying...' : 'Unlock Studio'}</span>
             <ArrowRight size={15} weight="bold" />
           </button>
         </form>
