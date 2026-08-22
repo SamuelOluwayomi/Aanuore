@@ -49,7 +49,7 @@ class PortfolioStore {
 
   async syncWithCloudinary() {
     const config = getCloudinaryConfig();
-    if (!config.cloudName || config.cloudName === 'aanuore') return;
+    if (!config.cloudName) return;
 
     const cloudImages = await fetchCloudinaryPortfolio(config.cloudName);
     if (cloudImages && cloudImages.length > 0) {

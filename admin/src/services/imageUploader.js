@@ -40,8 +40,8 @@ export async function compressImage(file, maxWidth = 2000, quality = 0.88) {
 }
 
 export async function uploadToCloudinary(file, { cloudName, uploadPreset } = {}) {
-  const activeCloud = cloudName || localStorage.getItem('aanuore_cloudinary_cloud');
-  const activePreset = uploadPreset || localStorage.getItem('aanuore_cloudinary_preset');
+  const activeCloud = cloudName || localStorage.getItem('aanuore_cloudinary_cloud') || 'dwhjng2ph';
+  const activePreset = uploadPreset || localStorage.getItem('aanuore_cloudinary_preset') || 'aanuore';
 
   if (activeCloud && activePreset) {
     try {

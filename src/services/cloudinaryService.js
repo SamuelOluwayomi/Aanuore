@@ -2,13 +2,13 @@
  * Cloudinary Integration Service for Aanuore Portfolio
  */
 
-const DEFAULT_CLOUD_NAME = 'aanuore';
+const DEFAULT_CLOUD_NAME = 'dwhjng2ph';
 const DEFAULT_TAG = 'aanuore_portfolio';
 
 export function getCloudinaryConfig() {
   return {
-    cloudName: localStorage.getItem('aanuore_cloudinary_cloud') || DEFAULT_CLOUD_NAME,
-    uploadPreset: localStorage.getItem('aanuore_cloudinary_preset') || '',
+    cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || localStorage.getItem('aanuore_cloudinary_cloud') || DEFAULT_CLOUD_NAME,
+    uploadPreset: import.meta.env.VITE_CLOUDINARY_PRESET || localStorage.getItem('aanuore_cloudinary_preset') || 'aanuore',
     tag: DEFAULT_TAG
   };
 }
