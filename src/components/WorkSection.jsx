@@ -30,6 +30,16 @@ export default function WorkSection() {
     return () => unsubscribe();
   }, []);
 
+  // Hide broken/deleted images silently — prevents black cards when a
+  // Cloudinary photo is deleted but still in a visitor's browser cache.
+  const handleImageError = (brokenId) => {
+    setAllImages((prev) => {
+      const filtered = prev.filter((img) => img.id !== brokenId);
+      setCurrentIndex((ci) => (ci >= filtered.length ? 0 : ci));
+      return filtered;
+    });
+  };
+
   const handleNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % total);
   }, [total]);
@@ -257,6 +267,7 @@ export default function WorkSection() {
                 <img
                   src={item.image}
                   alt={`Work ${item.serial}`}
+                  onError={() => handleImageError(item.id)}
                   style={{
                     filter: isCenter ? 'brightness(100%) contrast(100%)' : 'brightness(55%) contrast(85%)',
                     transition: 'filter 0.5s ease'
@@ -477,6 +488,10 @@ export default function WorkSection() {
                 key={allImages[lightboxIndex].id}
                 src={allImages[lightboxIndex].image}
                 alt={`Full Photograph ${allImages[lightboxIndex].serial}`}
+                onError={() => {
+                  handleImageError(allImages[lightboxIndex].id);
+                  setLightboxIndex(null);
+                }}
                 className="max-h-[68vh] w-auto max-w-full object-contain rounded-xl shadow-lg select-none animate-in fade-in zoom-in-95 duration-200"
               />
 
