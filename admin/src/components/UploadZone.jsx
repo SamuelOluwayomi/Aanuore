@@ -21,9 +21,9 @@ export default function UploadZone({ onUploadComplete }) {
       const file = files[i];
       setCurrentFileName(file.name);
       try {
-        const imageUrl = await uploadToCloudinary(file);
+        const res = await uploadToCloudinary(file);
         const title = file.name.replace(/\.[^/.]+$/, '');
-        adminStore.addImage(imageUrl, title);
+        adminStore.addImage(res.url, title, res.publicId);
         setUploadProgress(Math.round(((i + 1) / files.length) * 100));
       } catch (err) {
         console.error('Error uploading file:', file.name, err);

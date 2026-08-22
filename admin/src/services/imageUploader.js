@@ -61,12 +61,18 @@ export async function uploadToCloudinary(file, { cloudName, uploadPreset } = {})
       }
 
       const data = await response.json();
-      return data.secure_url;
+      return {
+        url: data.secure_url,
+        publicId: data.public_id
+      };
     } catch (err) {
       console.warn('Cloudinary upload failed, using optimized local data:', err);
     }
   }
 
   const { dataUrl } = await compressImage(file);
-  return dataUrl;
+  return {
+    url: dataUrl,
+    publicId: null
+  };
 }
