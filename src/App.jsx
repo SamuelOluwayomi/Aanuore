@@ -18,6 +18,7 @@ import {
   LinkedinLogo,
   FacebookLogo
 } from '@phosphor-icons/react';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   useScrollReveal();
@@ -238,6 +239,7 @@ export default function App() {
 
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
